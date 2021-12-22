@@ -1,3 +1,7 @@
 .pytest_cache
 .vscode
+<<<<<<< HEAD
 __pycache__
+=======
+.__pycache__
+>>>>>>> 2b552d978e4e5eaa1fffba7890d655b873b702f4
