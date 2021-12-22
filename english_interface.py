@@ -1,12 +1,5 @@
-from system import
-class WrongOptionError(Exception):
-    def __init__(self):
-        super().__init__('Wrong choice')
-
-def choice(self):
-    choice_input = input()
-    return choice_input
-
+from system import choice, WrongOptionError
+from inerface import choose_language
 class EN:
     def __init__(self):
         pass
@@ -21,19 +14,20 @@ class EN:
         return self.options(choice())
 
 
-
     def options(self, input):
-        if input == '1':
-            return
-        elif input == '2':
+        if input == 1:
+            choose_language()
+        elif input == 2:
             pass
-        elif input == '3':
+        elif input == 3:
             pass
-        elif input == '4':
+        elif input == 4:
             pass
-        elif input == '5':
+        elif input == 5:
             pass
-        elif input == '6':
+        elif input == 6:
             pass
         else:
             raise WrongOptionError
+
+#print(text())
