@@ -2,10 +2,8 @@ class WrongOptionError(Exception):
     def __init__(self):
         super().__init__('Wrong choice')
 
-def language():
-    pass
-
 def paper_ticket():
+    #otrzymanie krotki z typem biletu i iloscią
     pass
 
 
