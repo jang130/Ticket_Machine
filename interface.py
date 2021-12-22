@@ -8,8 +8,7 @@ def choose_language():
     print('Available languages: \n1.Polish\n2.English\n>')
     option = choice()
     if option == '1':
-        #polish()
-        pass
+        polish()
     elif option == '2':
         english()
     else:
@@ -21,11 +20,12 @@ def english():
     language = english_interface.EN()
     language.menu()
     options(language)
-'''
+
 def polish():
     language = polish_interface.PL()
-    language.text()
-'''
+    language.menu()
+    options(language)
+
 
 def options(language):
     option = choice()
