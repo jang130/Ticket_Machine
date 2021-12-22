@@ -1,5 +1,5 @@
 from system import choice, WrongOptionError
-from inerface import choose_language
+
 class EN:
     def __init__(self):
         pass
@@ -7,27 +7,49 @@ class EN:
 
     def text(self):
         print('Ticket Machine\n\r Choose an option: ')
-        print('1.Language menu\n\r 2.Paper ticket purchase')
-        print('3.Long term tickets purchase\n\r 4.Check ticket expiration')
-        print('5.Check amout of funds\n\r 6.Report problem')
+        print('1. Paper ticket purchase\n\r2. Long term tickets purchase')
+        print('3. Check ticket expiration\n\r4. Check amout of funds')
+        print('5. Report problem\n\r6. Terminate')
         print('>')
-        return self.options(choice())
+        self.options()
 
 
-    def options(self, input):
-        if input == 1:
-            choose_language()
-        elif input == 2:
+
+    def options(self):
+        if choice() == 1:
+            self.paper_ticket_purchase()
+        elif choice() == 2:
             pass
-        elif input == 3:
+        elif choice() == 3:
             pass
-        elif input == 4:
+        elif choice() == 4:
             pass
-        elif input == 5:
+        elif choice() == 5:
             pass
-        elif input == 6:
+        elif choice() == 6:
             pass
         else:
             raise WrongOptionError
 
-#print(text())
+    def paper_ticket_purchase(self):
+        ticket_type = ''
+        print('Choose type of ticket:\n>')
+        print('1. 20 minutes\n2. 75 minutes\n3. 24 hours\n4. 72 hours\n>')
+        if choice() == 1:
+            ticket_type = '20min'
+        elif choice() == 2:
+            ticket_type = '75min'
+        elif choice() == 3:
+            ticket_type = '24h'
+        elif choice() == 4:
+            ticket_type = '72h'
+        quantity = self.ticket_quantity()
+        #wywołanie funkcji kup bilet w w systemie
+
+    def ticket_quantity(self):
+        print('Input quantity of tickets:\n>')
+        quantity = choice()
+        return quantity
+
+    def go_back():
+        print('Do you want to go back to option menu?\n1. yes\n2. No')
