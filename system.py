@@ -22,5 +22,5 @@ def problem_report():
     pass
 
 def choice():
-    choice_input = int(input())
+    choice_input = str(input())
     return choice_input
