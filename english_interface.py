@@ -16,9 +16,6 @@ class EN:
         print('1. 20 minutes\n2. 75 minutes\n3. 24 hours\n4. 72 hours\n>')
 
 
-    def ticket_quantity(self):
-        print('Input quantity of tickets:\n>')
-
     def personal_data(self, type_of_name):
         if type_of_name == 'first':
             print('Input your first name:\n>')
