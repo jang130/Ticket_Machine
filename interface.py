@@ -1,11 +1,12 @@
 import english_interface
 import polish_interface
-from system import WrongOptionError, choice
+from system import WrongOptionError, choice, clear_console
 
 
 
 def choose_language():
-    print('Available languages: \n1.Polish\n2.English\n>')
+    clear_console()
+    print('Available languages: \n1.Polish\n2.English')
     option = choice()
     if option == '1':
         polish()
