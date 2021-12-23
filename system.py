@@ -1,11 +1,13 @@
 from datetime import datetime, date, time
+from paper_ticket_class import ticket
 import os
 class WrongOptionError(Exception):
     def __init__(self):
         super().__init__('Wrong choice')
 
-def paper_ticket():
-    #otrzymanie krotki z typem biletu i iloscią
+def system_ticket(ticket_info):
+    #recieve format ((fname,lastname), ticket_type)
+    #adds ticket to the database
     pass
 
 
@@ -37,3 +39,8 @@ def time_module():
 def clear_console():
     clear = lambda: os.system('clear')
     return clear()
+
+def load_file(path):
+    with open(path, 'r'):
+        people = []
+        file_handle.readline()
