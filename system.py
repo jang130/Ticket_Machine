@@ -1,5 +1,5 @@
 from datetime import datetime, date, time
-
+import os
 class WrongOptionError(Exception):
     def __init__(self):
         super().__init__('Wrong choice')
@@ -34,3 +34,6 @@ def time_module():
     formatted_time = currenttime.strftime("%H:%M:%S")
     return (formatted_time, formatted_date)
 
+def clear_console():
+    clear = lambda: os.system('clear')
+    return clear()
