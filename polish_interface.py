@@ -17,9 +17,6 @@ class PL:
         print('3. 24 godzinny\n4. 72 godzinny\n>')
 
 
-    def ticket_quantity(self):
-        print('Wprowadź ilość biletów:\n>')
-
     def personal_data(self, type_of_name):
         if type_of_name == 'first':
             print('Wprowadź swoje imie:\n>')

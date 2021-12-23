@@ -46,7 +46,6 @@ def options(language):
 
 def paper_ticket(language):
     ticket_type = paper_ticket_type(language)
-    quantity = ticket_quantity(language)
     name = personal_data(language)
 
 
@@ -63,10 +62,6 @@ def paper_ticket_type(language):
         ticket_type = '72h'
     return ticket_type
 
-def ticket_quantity(language):
-    language.ticket_quantity()
-    quantity = choice()
-    return quantity
 
 def personal_data(language):
     language.personal_data('first')
