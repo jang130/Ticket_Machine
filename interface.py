@@ -1,6 +1,6 @@
 import english_interface
 import polish_interface
-from system import WrongOptionError, choice, clear_console
+from system import WrongOptionError, choice, clear_console, system_ticket
 
 
 
@@ -31,7 +31,7 @@ def polish():
 def options(language):
     option = choice()
     if option == '1':
-        paper_ticket(language)
+        system_ticket(paper_ticket(language))
     elif option == '2':
         pass
     elif option == '3':
@@ -48,6 +48,7 @@ def options(language):
 def paper_ticket(language):
     ticket_type = paper_ticket_type(language)
     name = personal_data(language)
+    return (name, ticket_type)
 
 
 def paper_ticket_type(language):
@@ -72,5 +73,7 @@ def personal_data(language):
     name = (fname, lname)
     return name
 
+def send_to_system(input):
+    return input
 choose_language()
 
