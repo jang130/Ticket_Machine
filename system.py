@@ -1,4 +1,5 @@
 from datetime import datetime, date, time
+#from interface import time_ticket
 from paper_ticket_class import ticket
 from customer_class import customer
 import os
@@ -14,6 +15,9 @@ class TicketAlreadyExistsError(Exception):
     def __init__(self):
         super().__init__('Customer already have ticket')
 
+class TicketDoesNotExistError(Exception):
+    def __init__(self):
+        super().__init__('Customer does not have ticket')
 
 class machine_system:
     def __init__(self):
@@ -39,13 +43,41 @@ class machine_system:
         raise PersonNotFoundError
 
 
-    def sytem_time_ticket(self):
+    def system_check_ticket(self, name):
+        fname = name[0]
+        lname = name[1]
+        for person in self.people:
+            if fname == person.fname and lname == person.lname:
+                if person.ticket_date != 'None':
+                    time = person.ticket_date
+                    time = self.date_split(time)
+                    hour, minute, second, day, month, year = time
+                    if person.ticket_type == '1m':
+                        month += 1
+                    elif person.ticket_type == '3m':
+                        month +=3
+                    elif person.ticket_type == '1y':
+                        year +=1
+
+                else:
+                    raise TicketDoesNotExistError
+
+    def date_build(self):
         pass
-
-
-    def ticket_valid(self):
-        pass
-
+    def date_split(self, time):
+        validity = time.split(' ')
+        time, date = validity
+        time = time.split(':')
+        hour, minute, second = time
+        date = date.split('/')
+        day, month, year = date
+        hour = int(hour)
+        minute = int(minute)
+        second = int(second)
+        day = int(day)
+        month = int(month)
+        year = int(year)
+        return (hour, minute, second, day, month, year)
 
     def prepaid_check(self):
         pass
@@ -93,3 +125,6 @@ class machine_system:
                 line = f'{id},{fname},{lname},{ticket_type},{ticket_date},{funds}\n'
                 data_file.write(line)
 
+oper = machine_system()
+oper.load_file('Customer_data')
+print(oper.system_check_ticket(('Jakob','Pettet')))

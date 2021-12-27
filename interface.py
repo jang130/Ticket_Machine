@@ -1,4 +1,4 @@
-from datetime import time
+from datetime import date, time
 from os import name
 import english_interface
 import polish_interface
@@ -38,7 +38,7 @@ def options(language):
     elif option == '2':
         operation.system_ticket(time_ticket(language))
     elif option == '3':
-        pass
+        operation.system_check_ticket(check_ticket(language))
     elif option == '4':
         pass
     elif option == '5':
@@ -94,6 +94,10 @@ def time_ticket(language):
     ticket_type = time_ticket_type(language)
     name = personal_data(language)
     return (name, ticket_type)
+
+def check_ticket(language):
+    name = personal_data(language)
+    return name
 
 def send_to_system(input):
     return input
