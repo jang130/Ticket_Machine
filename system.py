@@ -58,12 +58,16 @@ class machine_system:
                         month +=3
                     elif person.ticket_type == '1y':
                         year +=1
-
                 else:
                     raise TicketDoesNotExistError
+        expiry = self.date_build(hour, minute, second, day, month, year)
+        return expiry
+#datetime wrong months
+    def date_build(self, hour, minute, second, day, month, year ):
+        time = f'{hour}:{minute}:{second}'
+        date = f'{day}/{month}/{year}'
+        return (time, date)
 
-    def date_build(self):
-        pass
     def date_split(self, time):
         validity = time.split(' ')
         time, date = validity
