@@ -1,13 +1,13 @@
 import english_interface
 import polish_interface
-from system import WrongOptionError, choice, clear_console, system_ticket
+import system
+from system import WrongOptionError, machine_system
 
-
-
+operation = machine_system()
 def choose_language():
-    clear_console()
+    operation.clear_console()
     print('Available languages: \n1.Polish\n2.English')
-    option = choice()
+    option = operation.choice()
     if option == '1':
         polish()
     elif option == '2':
@@ -18,20 +18,20 @@ def choose_language():
 
 
 def english():
-    language = english_interface.EN()
+    language = english_interface.EN(operation)
     language.menu()
     options(language)
 
 def polish():
-    language = polish_interface.PL()
+    language = polish_interface.PL(operation)
     language.menu()
     options(language)
 
 
 def options(language):
-    option = choice()
+    option = operation.choice()
     if option == '1':
-        system_ticket(paper_ticket(language))
+        operation.system_ticket(paper_ticket(language))
     elif option == '2':
         pass
     elif option == '3':
@@ -53,7 +53,7 @@ def paper_ticket(language):
 
 def paper_ticket_type(language):
     language.paper_ticket_type()
-    option = choice()
+    option = operation.choice()
     if option == '1':
         ticket_type = '20min'
     elif option == '2':
@@ -67,9 +67,9 @@ def paper_ticket_type(language):
 
 def personal_data(language):
     language.personal_data('first')
-    fname = choice()
+    fname = operation.choice()
     language.personal_data('last')
-    lname = choice()
+    lname = operation.choice()
     name = (fname, lname)
     return name
 

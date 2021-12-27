@@ -1,11 +1,12 @@
-from system import choice, WrongOptionError, time_module, clear_console
+from system import WrongOptionError, machine_system
 
 class PL:
-    def __init__(self):
-        self.date = f'Czas: {time_module()[0]} Data: {time_module()[1]}'
+    def __init__(self, operation):
+        self.operation = operation
+        self.date = f'Czas: {operation.time_module()[0]} Data: {operation.time_module()[1]}'
 
     def menu(self):
-        clear_console()
+        self.operation.clear_console()
         print(self.date)
         print('Biletomat\n\rWybierz opcje: ')
         print('1. Zakup biletu kartonikowego\n\r2. Zakup biletu okresowego')
@@ -14,7 +15,7 @@ class PL:
 
 
     def paper_ticket_type(self):
-        clear_console()
+        self.operation.clear_console()
         print(self.date)
         print('Wybierz typ biletu:')
         print('1. 20 minutowy\n2. 75 minutowy')
@@ -22,7 +23,7 @@ class PL:
 
 
     def personal_data(self, type_of_name):
-        clear_console()
+        self.operation.clear_console()
         print(self.date)
         if type_of_name == 'first':
             print('Wprowadź swoje imie:')
@@ -34,10 +35,10 @@ class PL:
 
 
     def go_back(self):
-        clear_console()
+        self.operation.clear_console()
         print(self.date)
         print('Czu chcesz wrócić do menu głównego?\n1. Tak\n2. Nie')
-        if choice() == '1':
+        if self.operation.choice() == '1':
             self.options()
-        elif choice() == '2':
+        elif self.operation.choice() == '2':
             pass
