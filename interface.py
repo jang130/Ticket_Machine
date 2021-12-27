@@ -4,6 +4,7 @@ import system
 from system import WrongOptionError, machine_system
 
 operation = machine_system()
+operation.load_file('Customer_data')
 def choose_language():
     operation.clear_console()
     print('Available languages: \n1.Polish\n2.English')

@@ -23,6 +23,7 @@ class machine_system:
             if fname == person.first_name:
                 if lname == person.last_name:
                     #write ticket type and date to file
+                    return 'Done'
             else:
                 raise PersonNotFoundError
 
@@ -67,4 +68,4 @@ class machine_system:
                 person = customer(columns)
                 self.people.append(person)
 
-#load_file('Customer_data')
+
