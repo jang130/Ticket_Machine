@@ -1,5 +1,6 @@
 from datetime import datetime, date, time
 from paper_ticket_class import ticket
+from customer_class import customer
 import os
 class WrongOptionError(Exception):
     def __init__(self):
@@ -41,6 +42,17 @@ def clear_console():
     return clear()
 
 def load_file(path):
-    with open(path, 'r'):
+    with open(path, 'r') as data_file:
         people = []
-        file_handle.readline()
+        data_file.readline()
+        for line in data_file:
+            line = line.rstrip()
+            columns = line.split(',')
+            id, first_name, last_name, ticket_type, ticket_date, funds = columns
+            person = customer(columns)
+            people.append(person)
+    for person in people:
+        print(person.ticket_date)
+
+
+print(load_file('Customer_data'))
