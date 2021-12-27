@@ -26,6 +26,12 @@ class EN:
         print('Choose type of ticket:')
         print('1. 20 minutes\n2. 75 minutes\n3. 24 hours\n4. 72 hours')
 
+    def time_ticket_type(self):
+        self.operation.clear_console()
+        print(self.date)
+        print('Wybierz typ biletu:')
+        print('1. Monthly\n2. 3 Months')
+        print('3. Yearly')
 
     def personal_data(self, type_of_name):
         self.operation.clear_console()

@@ -32,15 +32,14 @@ class machine_system:
                     person.ticket_type = ticket_type
                     person.ticket_date = f'{time} {date}'
                     self.write_file('Customer_data')
-                    #write ticket type and date to file
+                    return
                 else:
                     raise TicketAlreadyExistsError
-        #zeby nie wyskakiwało
+
         raise PersonNotFoundError
 
 
-
-    def time_ticket(self):
+    def sytem_time_ticket(self):
         pass
 
 

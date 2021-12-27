@@ -1,3 +1,5 @@
+from datetime import time
+from os import name
 import english_interface
 import polish_interface
 import system
@@ -34,7 +36,7 @@ def options(language):
     if option == '1':
         operation.system_ticket(paper_ticket(language))
     elif option == '2':
-        pass
+        operation.system_ticket(time_ticket(language))
     elif option == '3':
         pass
     elif option == '4':
@@ -51,7 +53,6 @@ def paper_ticket(language):
     name = personal_data(language)
     return (name, ticket_type)
 
-
 def paper_ticket_type(language):
     language.paper_ticket_type()
     option = operation.choice()
@@ -63,6 +64,21 @@ def paper_ticket_type(language):
         ticket_type = '24h'
     elif option == '4':
         ticket_type = '72h'
+    else:
+        raise WrongOptionError
+    return ticket_type
+
+def time_ticket_type(language):
+    language.time_ticket_type()
+    option = operation.choice()
+    if option == '1':
+        ticket_type = '1m'
+    elif option == '2':
+        ticket_type = '3m'
+    elif option == '3':
+        ticket_type = '1y'
+    else:
+        raise WrongOptionError
     return ticket_type
 
 
@@ -73,6 +89,11 @@ def personal_data(language):
     lname = operation.choice()
     name = (fname, lname)
     return name
+
+def time_ticket(language):
+    ticket_type = time_ticket_type(language)
+    name = personal_data(language)
+    return (name, ticket_type)
 
 def send_to_system(input):
     return input
