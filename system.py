@@ -3,6 +3,8 @@ from datetime import datetime, date, time
 from paper_ticket_class import ticket
 from customer_class import customer
 import os
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
 class WrongOptionError(Exception):
     def __init__(self):
@@ -46,27 +48,26 @@ class machine_system:
     def system_check_ticket(self, name):
         fname = name[0]
         lname = name[1]
+        expiry = 0
         for person in self.people:
             if fname == person.fname and lname == person.lname:
                 if person.ticket_date != 'None':
                     time = person.ticket_date
                     time = self.date_split(time)
                     hour, minute, second, day, month, year = time
+                    time = datetime(year, month, day, hour, minute, second)
                     if person.ticket_type == '1m':
-                        month += 1
+                        expiry = time + relativedelta(months=+1)
                     elif person.ticket_type == '3m':
-                        month +=3
+                        expiry = time + relativedelta(months=+3)
                     elif person.ticket_type == '1y':
-                        year +=1
+                        expiry = time + relativedelta(months=+12)
                 else:
                     raise TicketDoesNotExistError
-        expiry = self.date_build(hour, minute, second, day, month, year)
-        return expiry
-#datetime wrong months
-    def date_build(self, hour, minute, second, day, month, year ):
-        time = f'{hour}:{minute}:{second}'
-        date = f'{day}/{month}/{year}'
-        return (time, date)
+        if expiry != 0:
+            return expiry
+        else:
+            raise PersonNotFoundError
 
     def date_split(self, time):
         validity = time.split(' ')
@@ -128,7 +129,8 @@ class machine_system:
                 funds = person.funds
                 line = f'{id},{fname},{lname},{ticket_type},{ticket_date},{funds}\n'
                 data_file.write(line)
-
+'''
 oper = machine_system()
 oper.load_file('Customer_data')
 print(oper.system_check_ticket(('Jakob','Pettet')))
+'''

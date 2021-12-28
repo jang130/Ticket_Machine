@@ -41,6 +41,12 @@ class PL:
         return
 
 
+    def check_ticket(self, expiry):
+        self.operation.clear_console()
+        print(self.date)
+        print('Ważność biletu do: ')
+        print(expiry)
+
     def go_back(self):
         self.operation.clear_console()
         print(self.date)

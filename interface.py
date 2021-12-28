@@ -38,7 +38,8 @@ def options(language):
     elif option == '2':
         operation.system_ticket(time_ticket(language))
     elif option == '3':
-        operation.system_check_ticket(check_ticket(language))
+        expiry = operation.system_check_ticket(check_ticket(language))
+        language.check_ticket(expiry)
     elif option == '4':
         pass
     elif option == '5':
