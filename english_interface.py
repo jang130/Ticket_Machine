@@ -50,6 +50,16 @@ class EN:
         print('Ticket is valid till: ')
         print(expiry)
 
+    def operation_done(self):
+        self.operation.clear_console()
+        print(self.date)
+        print('The operation is successful.')
+
+    def prepaid_check(self, funds):
+        self.operation.clear_console()
+        print(self.date)
+        print(f'Available funds: {funds} zł')
+
     def go_back(self):
         self.operation.clear_console()
         print(self.date)

@@ -35,13 +35,16 @@ def options(language):
     option = operation.choice()
     if option == '1':
         operation.system_ticket(paper_ticket(language))
+        language.operation_done()
     elif option == '2':
         operation.system_ticket(time_ticket(language))
+        language.operation_done()
     elif option == '3':
         expiry = operation.system_check_ticket(check_ticket(language))
         language.check_ticket(expiry)
     elif option == '4':
-        pass
+        funds = operation.system_prepaid_check(prepaid_check(language))
+        language.prepaid_check(funds)
     elif option == '5':
         pass
     elif option == '6':
@@ -82,6 +85,9 @@ def time_ticket_type(language):
         raise WrongOptionError
     return ticket_type
 
+def prepaid_check(language):
+    name = personal_data(language)
+    return name
 
 def personal_data(language):
     language.personal_data('first')

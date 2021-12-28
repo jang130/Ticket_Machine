@@ -21,6 +21,10 @@ class TicketDoesNotExistError(Exception):
     def __init__(self):
         super().__init__('Customer does not have ticket')
 
+class IsNotTimeTicketError(Exception):
+    def __init__(self):
+        super().__init__('Ticket is not a period ticket')
+
 class machine_system:
     def __init__(self):
         pass
@@ -62,6 +66,8 @@ class machine_system:
                         expiry = time + relativedelta(months=+3)
                     elif person.ticket_type == '1y':
                         expiry = time + relativedelta(months=+12)
+                    elif person.ticket_type in ('20min', '75min', '24h', '72h'):
+                        raise IsNotTimeTicketError
                 else:
                     raise TicketDoesNotExistError
         if expiry != 0:
@@ -84,8 +90,13 @@ class machine_system:
         year = int(year)
         return (hour, minute, second, day, month, year)
 
-    def prepaid_check(self):
-        pass
+    def system_prepaid_check(self, name):
+        fname = name[0]
+        lname = name[1]
+        for person in self.people:
+            if fname == person.fname and lname == person.lname:
+                return person.funds
+        raise PersonNotFoundError
 
     def problem_report(self):
         pass
