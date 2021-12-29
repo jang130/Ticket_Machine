@@ -55,7 +55,7 @@ class PL:
     def prepaid_check(self, funds):
         self.operation.clear_console()
         print(self.date)
-        print(f'Dostępne środki: {funds}zł')
+        print(f'Dostępne środki:{funds[0]}.{funds[1]}zł')
 
     def go_back(self):
         self.operation.clear_console()
