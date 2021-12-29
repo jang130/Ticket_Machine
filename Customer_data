@@ -1,11 +1,11 @@
 id,first_name,last_name,ticket_type,ticket_date,funds
-1,Doralyn,Dovermann,None,None,15
+1,Doralyn,Dovermann,1y,12:04:10 28/12/2021,15
 2,Rickert,Petschel,None,None,12.40
-3,Whitney,Girardoni,None,None,100
-4,Jakob,Pettet,None,None,16
+3,Whitney,Girardoni,20min,12:04:35 28/12/2021,100
+4,Jakob,Pettet,3m,16:28:42 27/12/2021,16
 5,Munroe,Rosenstiel,None,None,17
 6,Wolfy,Ferrelli,None,None,17
-7,Paule,Charlot,None,None,17
+7,Paule,Charlot,20min,23:06:06 29/12/2021,17
 8,Alasteir,Lark,None,None,17
 9,Rozanne,Castledine,None,None,172
-10,Teresa,Weitzel,None,None,17
+10,Teresa,Weitzel,1y,00:04:15 30/12/2021,1372
