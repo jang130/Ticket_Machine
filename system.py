@@ -1,10 +1,10 @@
 from datetime import datetime, date, time
-#from interface import time_ticket
 from paper_ticket_class import ticket
 from customer_class import customer
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import math
 
 class WrongOptionError(Exception):
     def __init__(self):
@@ -25,22 +25,28 @@ class IsNotTimeTicketError(Exception):
     def __init__(self):
         super().__init__('Ticket is not a period ticket')
 
+class NotEnoughMoneyError(Exception):
+    def __init__(self):
+        super().__init__('Insufficient funds')
+
 class machine_system:
     def __init__(self):
         pass
 
     def system_ticket(self, ticket_info):
+        #recieve format ((fname,lastname), ticket_type)
+        #adds ticket to the database
         name, ticket_type = ticket_info
         fname, lname = name
         time = self.time_module()[0]
         date = self.time_module()[1]
-        #recieve format ((fname,lastname), ticket_type)
-        #adds ticket to the database
         for person in self.people:
             if fname == person.fname and lname == person.lname:
                 if person.ticket_type == 'None':
+                    funds = person.funds
                     person.ticket_type = ticket_type
                     person.ticket_date = f'{time} {date}'
+                    person.funds = self.buy_ticket(funds, ticket_type)
                     self.write_file('Customer_data')
                     return
                 else:
@@ -75,6 +81,45 @@ class machine_system:
         else:
             raise PersonNotFoundError
 
+    def money(self, funds, cost=None):
+        funds = int(funds)
+        zl = funds // 100
+        gr = funds % 100
+        if cost is None:
+            return (zl, gr)
+
+        costzl = cost // 100
+        costgr = cost % 100
+        zl = zl - costzl
+        if zl < 0:
+            raise NotEnoughMoneyError
+        difference = costgr - gr
+        gr = gr - costgr
+        if gr < 0:
+            zl -= 1
+            gr =  100 - difference
+        funds = f"{zl}{gr}"
+        return funds
+
+
+    def buy_ticket(self, funds, ticket_type):
+        if ticket_type == '20min':
+            funds = self.money(funds, 340)
+        elif ticket_type == '75min':
+            funds = self.money(funds, 340)
+        elif ticket_type == '24h':
+            funds = self.money(funds, 340)
+        elif ticket_type == '72h':
+            funds = self.money(funds, 340)
+        elif ticket_type == '1m':
+            funds = self.money(funds, 340)
+        elif ticket_type == '3m':
+            funds = self.money(funds, 340)
+        elif ticket_type == '1y':
+            funds = self.money(funds, 340)
+        return funds
+
+
     def date_split(self, time):
         validity = time.split(' ')
         time, date = validity
@@ -95,7 +140,7 @@ class machine_system:
         lname = name[1]
         for person in self.people:
             if fname == person.fname and lname == person.lname:
-                return person.funds
+                return self.money(person.funds)
         raise PersonNotFoundError
 
     def problem_report(self):
@@ -111,7 +156,7 @@ class machine_system:
         formatted_date = currentdate.strftime("%d/%m/%Y")
         formatted_time = currenttime.strftime("%H:%M:%S")
         return (formatted_time, formatted_date)
-        #return (currenttime.isoformat(), currentdate.isoformat())
+
 
     def clear_console(self):
         clear = lambda: os.system('clear')
@@ -140,8 +185,9 @@ class machine_system:
                 funds = person.funds
                 line = f'{id},{fname},{lname},{ticket_type},{ticket_date},{funds}\n'
                 data_file.write(line)
-'''
+
 oper = machine_system()
 oper.load_file('Customer_data')
-print(oper.system_check_ticket(('Jakob','Pettet')))
-'''
+#print(oper.money(1144,5522))
+
+
