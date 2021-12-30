@@ -1,5 +1,8 @@
 .pytest_cache
 .vscode
+.__pycache__
+.tests.__pycache__
+.ticket_machine.__pycache__
 <<<<<<< HEAD
 __pycache__
 =======

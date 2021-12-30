@@ -188,6 +188,6 @@ class machine_system:
 
 oper = machine_system()
 oper.load_file('Customer_data')
-#print(oper.money(1144,5522))
+print(oper.money(1144))
 
 
