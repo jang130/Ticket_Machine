@@ -4,7 +4,7 @@ from customer_class import customer
 import os
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-import math
+
 
 class WrongOptionError(Exception):
     def __init__(self):

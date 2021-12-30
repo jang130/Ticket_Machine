@@ -1,4 +1,4 @@
-from english_interface import text, choose_language, options, choice
+from
 
 def test_EN_interface_choice(monkeypatch):
     def choice():
