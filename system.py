@@ -217,7 +217,7 @@ class machine_system:
                 return self.money(person.funds)
         raise PersonNotFoundError
 
-    def problem_report(self):
+    def system_problem_report(self):
         '''
         problem_report is  a method that saves actual state of machine
         and does the error report file.
@@ -233,6 +233,15 @@ class machine_system:
         return choice_input
 
     def time_module(self, issecond=None):
+        '''
+        time_module is double option method that
+        returns formatted current time and date from system.
+        If is second is False then time is returned in hour:minute format.
+        If issecond is None time is returned in hour:minute:second format.
+
+        :param issecond:
+        :type boolean (False):
+        '''
         currenttime = datetime.now()
         currentdate = date.today()
         if issecond is False:
@@ -244,10 +253,21 @@ class machine_system:
         return (formatted_time, formatted_date)
 
     def clear_console(self):
+        '''
+        clear_console is a method that clears system terminal.
+        '''
         clear = lambda: os.system('clear')
         return clear()
 
     def load_file(self, path):
+        '''
+        load_file is a method that reads database file from
+        given path and it create list of customer's objects.
+        used to read Customer_data.
+
+        :param path:
+        :type string:
+        '''
         with open(path, 'r') as data_file:
             self.people = []
             data_file.readline()
@@ -258,7 +278,23 @@ class machine_system:
                 person = customer(columns)
                 self.people.append(person)
 
+    def error_log(self, path):
+        with open(path, "r") as log:
+            data = log.read()
+
+        with open(path, "w") as log:
+            log.write(data + 'kaczki')
+
+
     def write_file(self, path):
+        '''
+        write_file is a method thats overwrites Customer_data with
+        updated informations.
+
+        :param path:
+        :type string:
+
+        '''
         with open(path, 'w') as data_file:
             data_file.write('id,first_name,last_name,ticket_type,ticket_date,funds\n')
             for person in self.people:
@@ -272,7 +308,7 @@ class machine_system:
                 data_file.write(line)
 
 oper = machine_system()
-oper.load_file('Customer_data')
-print(oper.money(1625))
+oper.error_log('Customer_data')
+#print(oper.money(1625))
 
 
