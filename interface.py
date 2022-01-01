@@ -15,6 +15,8 @@ def choose_language():
         polish()
     elif option == '2':
         english()
+    #elif option == '3':
+        #turkish()
     else:
         raise WrongOptionError
 
@@ -30,6 +32,12 @@ def polish():
     language.menu()
     options(language)
 
+'''
+def turkish():
+    language = turkish_interface.TR(operation)
+    language.menu()
+    options(language)
+'''
 
 def options(language):
     option = operation.choice()
