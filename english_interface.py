@@ -1,15 +1,12 @@
-from datetime import time
-from system import WrongOptionError, machine_system
-
-
+from system import WrongOptionError
 
 
 class EN:
     def __init__(self, operation):
         self.operation = operation
-        self.date = f'Time: {operation.time_module(False)[0]} Date: {operation.time_module(False)[1]}'
-
-
+        time = operation.time_module(False)[0]
+        date = operation.time_module(False)[1]
+        self.date = f'Time: {time} Date: {date}'
 
     def menu(self):
         self.operation.clear_console()
@@ -18,7 +15,6 @@ class EN:
         print('1. Paper ticket purchase\n\r2. Long term tickets purchase')
         print('3. Check ticket expiration\n\r4. Check amout of funds')
         print('5. Report problem\n\r6. Terminate')
-
 
     def paper_ticket_type(self):
         self.operation.clear_console()
@@ -59,11 +55,6 @@ class EN:
         self.operation.clear_console()
         print(self.date)
         print(f'Available funds: {funds[0]}.{funds[1]} zł')
-
-    def go_back(self):
-        self.operation.clear_console()
-        print(self.date)
-        print('Do you want to go back to option menu?\n1. yes\n2. No')
 
     def terminate(self):
         self.operation.clear_console()
