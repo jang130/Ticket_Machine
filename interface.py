@@ -1,5 +1,6 @@
 import english_interface
 import polish_interface
+import turkish_interface
 from system import WrongOptionError, machine_system
 import time
 
@@ -9,14 +10,14 @@ operation = machine_system()
 def choose_language():
     operation.load_file('Customer_data')
     operation.clear_console()
-    print('Available languages: \n1.Polish\n2.English')
+    print('Available languages: \n1.Polish\n2.English\n3.Turkish')
     option = operation.choice()
     if option == '1':
         polish()
     elif option == '2':
         english()
-    #elif option == '3':
-        #turkish()
+    elif option == '3':
+        turkish()
     else:
         operation.error_log(WrongOptionError)
         raise WrongOptionError
@@ -33,12 +34,12 @@ def polish():
     language.menu()
     options(language)
 
-'''
+
 def turkish():
     language = turkish_interface.TR(operation)
     language.menu()
     options(language)
-'''
+
 
 def options(language):
     option = operation.choice()
@@ -60,16 +61,15 @@ def options(language):
         language.prepaid_check(funds)
     elif option == '5':
         state = 5
-        pass
+        problem_report(language, state)
     elif option == '6':
         state = 6
-    else:
-        operation.error_log(WrongOptionError)
-        raise WrongOptionError
-    if state == 6:
         language.terminate()
         time.sleep(3)
         terminate()
+    else:
+        operation.error_log(WrongOptionError)
+        raise WrongOptionError
     time.sleep(7)
     language.terminate()
     terminate()
@@ -127,8 +127,11 @@ def time_ticket(language):
     return (name, ticket_type)
 
 
-def problem_report(state):
-    pass
+def problem_report(language, state):
+    language.problem_report()
+    message = operation.choice()
+    operation.error_log(None, message)
+    language.operation_done()
 
 
 def check_ticket(language):
