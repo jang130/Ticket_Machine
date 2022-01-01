@@ -9,4 +9,6 @@ id,first_name,last_name,ticket_type,ticket_date,funds
 8,Alasteir,Lark,None,None,17
 9,Rozanne,Castledine,None,None,172
 10,Teresa,Weitzel,1y,00:04:15 30/12/2021,1372
-11,a,a,None,None,19660
+11,a,a,3m,22:49:32 01/01/2022,19320
+12,Adam,Moszczyński,None,None,10000
+

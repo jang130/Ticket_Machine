@@ -1,4 +1,5 @@
 
+kaczka
 20:37:50 01/01/2022 Error:<class 'system.TicketAlreadyExistsError'>
 20:38:37 01/01/2022 Error:<class 'system.TicketAlreadyExistsError'>
 20:40:45 01/01/2022 Error:<class 'system.PersonNotFoundError'>
@@ -9,7 +10,5 @@
 21:16:09 01/01/2022 Error:<class 'system.WrongOptionError'>
 21:18:02 01/01/2022 Error:<class 'system.WrongOptionError'>
 21:19:42 01/01/2022 Error:<class 'system.WrongOptionError'>
+
 22:48:32 01/01/2022 Error:<class 'system.WrongOptionError'>
-22:50:15 01/01/2022 Error:<class 'system.WrongOptionError'>
-22:55:37 01/01/2022 Error:<class 'system.WrongOptionError'>
-22:55:56 01/01/2022 Error:<class 'system.WrongOptionError'>
