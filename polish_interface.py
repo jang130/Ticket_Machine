@@ -3,7 +3,7 @@ from system import WrongOptionError, machine_system
 class PL:
     def __init__(self, operation):
         self.operation = operation
-        self.date = f'Czas: {operation.time_module()[0]} Data: {operation.time_module()[1]}'
+        self.date = f'Czas: {operation.time_module(False)[0]} Data: {operation.time_module(False)[1]}'
 
     def menu(self):
         self.operation.clear_console()
@@ -61,7 +61,8 @@ class PL:
         self.operation.clear_console()
         print(self.date)
         print('Czu chcesz wrócić do menu głównego?\n1. Tak\n2. Nie')
-        if self.operation.choice() == '1':
-            self.options()
-        elif self.operation.choice() == '2':
-            pass
+
+    def terminate(self):
+        self.operation.clear_console()
+        print(self.date)
+        print('Sesja została zakończona.')

@@ -1,13 +1,13 @@
-from datetime import date, time
-from os import name
 import english_interface
 import polish_interface
-import system
 from system import WrongOptionError, machine_system
+import time
+
 
 operation = machine_system()
-operation.load_file('Customer_data')
+
 def choose_language():
+    operation.load_file('Customer_data')
     operation.clear_console()
     print('Available languages: \n1.Polish\n2.English')
     option = operation.choice()
@@ -19,11 +19,11 @@ def choose_language():
         raise WrongOptionError
 
 
-
 def english():
     language = english_interface.EN(operation)
     language.menu()
     options(language)
+
 
 def polish():
     language = polish_interface.PL(operation)
@@ -34,23 +34,35 @@ def polish():
 def options(language):
     option = operation.choice()
     if option == '1':
+        state = 1
         operation.system_ticket(paper_ticket(language))
         language.operation_done()
     elif option == '2':
+        state = 2
         operation.system_ticket(time_ticket(language))
         language.operation_done()
     elif option == '3':
+        state = 3
         expiry = operation.system_check_ticket(check_ticket(language))
         language.check_ticket(expiry)
     elif option == '4':
+        state = 4
         funds = operation.system_prepaid_check(prepaid_check(language))
         language.prepaid_check(funds)
     elif option == '5':
+        state = 5
         pass
     elif option == '6':
-        pass
+        state = 6
     else:
         raise WrongOptionError
+    if state == 6:
+        language.terminate()
+        time.sleep(3)
+        terminate()
+    time.sleep(7)
+    language.terminate()
+    terminate()
 
 def paper_ticket(language):
     ticket_type = paper_ticket_type(language)
@@ -102,11 +114,14 @@ def time_ticket(language):
     name = personal_data(language)
     return (name, ticket_type)
 
+
 def check_ticket(language):
     name = personal_data(language)
     return name
 
-def send_to_system(input):
-    return input
+
+def terminate():
+    choose_language()
+
 choose_language()
 

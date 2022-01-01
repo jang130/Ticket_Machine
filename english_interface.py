@@ -7,7 +7,7 @@ from system import WrongOptionError, machine_system
 class EN:
     def __init__(self, operation):
         self.operation = operation
-        self.date = f'Time: {operation.time_module()[0]} Date: {operation.time_module()[1]}'
+        self.date = f'Time: {operation.time_module(False)[0]} Date: {operation.time_module(False)[1]}'
 
 
 
@@ -64,7 +64,8 @@ class EN:
         self.operation.clear_console()
         print(self.date)
         print('Do you want to go back to option menu?\n1. yes\n2. No')
-        if self.operation.choice() == '1':
-            self.options()
-        elif self.operation.choice() == '2':
-            pass
+
+    def terminate(self):
+        self.operation.clear_console()
+        print(self.date)
+        print('Session has been terminated.')
