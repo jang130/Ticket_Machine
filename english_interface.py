@@ -13,7 +13,7 @@ class EN:
         print(self.date)
         print('Ticket Machine\n\rChoose an option: ')
         print('1. Paper ticket purchase\n\r2. Long term tickets purchase')
-        print('3. Check ticket expiration\n\r4. Check amout of funds')
+        print('3. Check ticket expiration\n\r4. Check amount of funds')
         print('5. Report problem\n\r6. Terminate')
 
     def paper_ticket_type(self):
