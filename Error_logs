@@ -1,0 +1,8 @@
+
+20:37:50 01/01/2022 Error:<class 'system.TicketAlreadyExistsError'>
+20:38:37 01/01/2022 Error:<class 'system.TicketAlreadyExistsError'>
+20:40:45 01/01/2022 Error:<class 'system.PersonNotFoundError'>
+20:43:07 01/01/2022 Error:<class 'system.WrongOptionError'>
+20:43:27 01/01/2022 Error:<class 'system.PersonNotFoundError'>
+20:45:12 01/01/2022 Error:<class 'system.TicketAlreadyExistsError'>
+20:52:34 01/01/2022 Error:<class 'system.MissingFileError'>
