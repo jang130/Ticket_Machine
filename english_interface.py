@@ -60,3 +60,8 @@ class EN:
         self.operation.clear_console()
         print(self.date)
         print('Session has been terminated.')
+
+    def problem_report(self):
+        self.operation.clear_console()
+        print(self.date)
+        print('Please input problem description:')

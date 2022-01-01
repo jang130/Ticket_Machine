@@ -61,3 +61,8 @@ class PL:
         self.operation.clear_console()
         print(self.date)
         print('Sesja została zakończona.')
+
+    def problem_report(self):
+        self.operation.clear_console()
+        print(self.date)
+        print('Proszę opisać problem:')
