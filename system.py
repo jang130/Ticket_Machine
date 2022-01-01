@@ -1,4 +1,5 @@
 from datetime import datetime, date
+from time import time
 from customer_class import customer
 import os
 from datetime import datetime
@@ -36,6 +37,11 @@ class NotEnoughMoneyError(Exception):
         super().__init__('Insufficient funds')
 
 
+class MissingFileError(FileNotFoundError):
+    def __init__(self):
+        super().__init__('Data file not found')
+
+
 class machine_system:
     '''
     System class that does all of
@@ -69,8 +75,10 @@ class machine_system:
                     self.write_file('Customer_data')
                     return
                 else:
+                    self.error_log(TicketAlreadyExistsError)
                     raise TicketAlreadyExistsError
 
+        self.error_log(PersonNotFoundError)
         raise PersonNotFoundError
 
     def system_check_ticket(self, name):
@@ -100,12 +108,15 @@ class machine_system:
                     elif person.ticket_type == '1y':
                         expiry = time + relativedelta(months=+12)
                     elif person.ticket_type in ('20min', '75min', '24h', '72h'):
+                        self.error_log(IsNotTimeTicketError)
                         raise IsNotTimeTicketError
                 else:
+                    self.error_log(TicketDoesNotExistError)
                     raise TicketDoesNotExistError
         if expiry != 0:
             return expiry
         else:
+            self.error_log(PersonNotFoundError)
             raise PersonNotFoundError
 
     def money(self, funds, cost=None):
@@ -135,6 +146,7 @@ class machine_system:
         costgr = cost % 100
         zl = zl - costzl
         if zl < 0:
+            self.error_log(NotEnoughMoneyError)
             raise NotEnoughMoneyError
         difference = costgr - gr
         gr = gr - costgr
@@ -215,6 +227,7 @@ class machine_system:
         for person in self.people:
             if fname == person.fname and lname == person.lname:
                 return self.money(person.funds)
+        self.error_log(PersonNotFoundError)
         raise PersonNotFoundError
 
     def system_problem_report(self):
@@ -268,22 +281,35 @@ class machine_system:
         :param path:
         :type string:
         '''
-        with open(path, 'r') as data_file:
-            self.people = []
-            data_file.readline()
-            for line in data_file:
-                line = line.rstrip()
-                columns = line.split(',')
-                id, fname, lname, ticket_type, ticket_date, funds = columns
-                person = customer(columns)
-                self.people.append(person)
+        try:
+            with open(path, 'r') as data_file:
+                self.people = []
+                data_file.readline()
+                for line in data_file:
+                    line = line.rstrip()
+                    columns = line.split(',')
+                    id, fname, lname, ticket_type, ticket_date, funds = columns
+                    person = customer(columns)
+                    self.people.append(person)
+        except FileNotFoundError:
+            self.error_log(MissingFileError)
+            raise MissingFileError
 
-    def error_log(self, path):
-        with open(path, "r") as log:
-            data = log.read()
+    def error_log(self, error):
+        error = str(error)
+        time = self.time_module()[0]
+        date = self.time_module()[1]
+        try:
+            with open('Error_logs', "r") as log:
+                data = log.read()
 
-        with open(path, "w") as log:
-            log.write(data + 'kaczki')
+            with open('Error_logs', "w") as log:
+                log.write(data)
+                log.write(f'\n{time} {date} Error:{error}')
+        except FileNotFoundError:
+            self.error_log(MissingFileError)
+            raise MissingFileError
+
 
 
     def write_file(self, path):
@@ -307,8 +333,8 @@ class machine_system:
                 line = f'{id},{fname},{lname},{ticket_type},{ticket_date},{funds}\n'
                 data_file.write(line)
 
-oper = machine_system()
-oper.error_log('Customer_data')
+#oper = machine_system()
+#oper.error_log('Customer_data')
 #print(oper.money(1625))
 
 

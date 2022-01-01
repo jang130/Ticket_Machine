@@ -18,6 +18,7 @@ def choose_language():
     #elif option == '3':
         #turkish()
     else:
+        operation.error_log(WrongOptionError)
         raise WrongOptionError
 
 
@@ -63,6 +64,7 @@ def options(language):
     elif option == '6':
         state = 6
     else:
+        operation.error_log(WrongOptionError)
         raise WrongOptionError
     if state == 6:
         language.terminate()
@@ -89,6 +91,7 @@ def paper_ticket_type(language):
     elif option == '4':
         ticket_type = '72h'
     else:
+        operation.error_log(WrongOptionError)
         raise WrongOptionError
     return ticket_type
 
@@ -102,6 +105,7 @@ def time_ticket_type(language):
     elif option == '3':
         ticket_type = '1y'
     else:
+        operation.error_log(WrongOptionError)
         raise WrongOptionError
     return ticket_type
 
@@ -121,6 +125,10 @@ def time_ticket(language):
     ticket_type = time_ticket_type(language)
     name = personal_data(language)
     return (name, ticket_type)
+
+
+def problem_report(state):
+    pass
 
 
 def check_ticket(language):
