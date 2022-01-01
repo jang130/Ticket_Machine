@@ -230,12 +230,6 @@ class machine_system:
         self.error_log(PersonNotFoundError)
         raise PersonNotFoundError
 
-    def system_problem_report(self):
-        '''
-        problem_report is  a method that saves actual state of machine
-        and does the error report file.
-        '''
-        pass
 
     def choice(self):
         '''
@@ -295,22 +289,30 @@ class machine_system:
             self.error_log(MissingFileError)
             raise MissingFileError
 
-    def error_log(self, error):
-        error = str(error)
+    def error_log(self, error=None, message=None):
+        '''
+        problem_report is  a method that saves actual state of machine
+        and does the error report file.
+        '''
         time = self.time_module()[0]
         date = self.time_module()[1]
         try:
             with open('Error_logs', "r") as log:
                 data = log.read()
-
-            with open('Error_logs', "w") as log:
-                log.write(data)
-                log.write(f'\n{time} {date} Error:{error}')
+            if message is  None:
+                error = str(error)
+                with open('Error_logs', "w") as log:
+                    log.write(data)
+                    log.write(f'\n{time} {date} Error:{error}')
+            elif error is None:
+                with open('Problem_report', "w") as log:
+                        log.write(f'\n{message}')
+                        log.write(data)
+            else:
+                pass
         except FileNotFoundError:
             self.error_log(MissingFileError)
             raise MissingFileError
-
-
 
     def write_file(self, path):
         '''
@@ -335,6 +337,8 @@ class machine_system:
 
 #oper = machine_system()
 #oper.error_log('Customer_data')
+#message = 'jkaxsca'
+#oper.error_log(None, message)
 #print(oper.money(1625))
 
 
