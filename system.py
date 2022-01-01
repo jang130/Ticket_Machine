@@ -1,41 +1,60 @@
-from datetime import datetime, date, time
-from paper_ticket_class import ticket
+from datetime import datetime, date
 from customer_class import customer
 import os
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 
+
 class WrongOptionError(Exception):
     def __init__(self):
         super().__init__('Wrong choice')
+
+
 class PersonNotFoundError(Exception):
     def __init__(self):
         super().__init__('Customer not found in database')
+
 
 class TicketAlreadyExistsError(Exception):
     def __init__(self):
         super().__init__('Customer already have ticket')
 
+
 class TicketDoesNotExistError(Exception):
     def __init__(self):
         super().__init__('Customer does not have ticket')
+
 
 class IsNotTimeTicketError(Exception):
     def __init__(self):
         super().__init__('Ticket is not a period ticket')
 
+
 class NotEnoughMoneyError(Exception):
     def __init__(self):
         super().__init__('Insufficient funds')
 
+
 class machine_system:
+    '''
+    System class that does all of
+    the needed file and computing operations
+    '''
     def __init__(self):
         pass
 
     def system_ticket(self, ticket_info):
-        #recieve format ((fname,lastname), ticket_type)
-        #adds ticket to the database
+        '''
+        System ticket is a method that have input information
+        about customers full name and choosen ticket tipe.
+        Based on that method buys a ticket and puts to the database.
+
+        :param ticket_info:
+        :type tuple:
+        :format ((fname,lastname), ticket_type)
+        fname, lname and ticket_type are strings.
+        '''
         name, ticket_type = ticket_info
         fname, lname = name
         time = self.time_module()[0]
@@ -54,8 +73,16 @@ class machine_system:
 
         raise PersonNotFoundError
 
-
     def system_check_ticket(self, name):
+        '''
+        System check ticket is a method that checks
+        in the database expiry date of period type ticket
+
+        :param name:
+        :type tuple:
+        :format (fname, lastname):
+        fname and lname are strings.
+        '''
         fname = name[0]
         lname = name[1]
         expiry = 0
@@ -82,6 +109,22 @@ class machine_system:
             raise PersonNotFoundError
 
     def money(self, funds, cost=None):
+        '''
+        money method is a method with double task.
+        When cost is None the function returns funds
+        example: money(1625) returns (16, 25) input funds
+        are gr and output are (zl, gr).
+        When cost is a number it returns the amount of funds
+        after cost difference.
+        example: money(1625,1325) does operation 16,25-13,25
+        and returns 30 which means 3zl 0gr or 30gr
+
+        :param funds:
+        :type int:
+
+        :param cost:
+        :type int:
+        '''
         funds = int(funds)
         zl = funds // 100
         gr = funds % 100
@@ -97,12 +140,23 @@ class machine_system:
         gr = gr - costgr
         if gr < 0:
             zl -= 1
-            gr =  100 - difference
+            gr = 100 - difference
         funds = f"{zl}{gr}"
         return funds
 
-
     def buy_ticket(self, funds, ticket_type):
+        '''
+        buy_ticket is a method that checks the ticket type
+        and based on that choose amount of money that will
+        be taken from funds. Cost of each ticket is strictly
+        precised in gr (grosz).
+
+        :param funds:
+        :type int:
+
+        :param ticket_type:
+        :type string:
+        '''
         if ticket_type == '20min':
             funds = self.money(funds, 340)
         elif ticket_type == '75min':
@@ -119,8 +173,18 @@ class machine_system:
             funds = self.money(funds, 340)
         return funds
 
-
     def date_split(self, time):
+        '''
+        date_split is a helping method to the formatting
+        date loaded from database. Method cuts given time in
+        str formatt and puts each value to the specified variable.
+        If input is for example 12:04:35 28/12/2021
+        then it returns (12,4,35,28,12,2021)
+
+        :param time:
+        :type string:
+        :format "hour:minute:second day,month,year":
+        '''
         validity = time.split(' ')
         time, date = validity
         time = time.split(':')
@@ -136,6 +200,16 @@ class machine_system:
         return (hour, minute, second, day, month, year)
 
     def system_prepaid_check(self, name):
+        '''
+        system_prepaid_check is a method that checks the amount of
+        funds in database for a given customer and using one functionality
+        from money method returns funds splitted to zl (złoty) and gr (grosz).
+
+        :param name:
+        :type tuple:
+        :format (fname, lname):
+        fname and lname are strings.
+        '''
         fname = name[0]
         lname = name[1]
         for person in self.people:
@@ -144,19 +218,30 @@ class machine_system:
         raise PersonNotFoundError
 
     def problem_report(self):
+        '''
+        problem_report is  a method that saves actual state of machine
+        and does the error report file.
+        '''
         pass
 
     def choice(self):
+        '''
+        choice is a method that takes user input
+        as string.
+        '''
         choice_input = str(input())
         return choice_input
 
-    def time_module(self):
+    def time_module(self, issecond=None):
         currenttime = datetime.now()
         currentdate = date.today()
-        formatted_date = currentdate.strftime("%d/%m/%Y")
-        formatted_time = currenttime.strftime("%H:%M:%S")
+        if issecond is False:
+            formatted_date = currentdate.strftime("%d/%m/%Y")
+            formatted_time = currenttime.strftime("%H:%M")
+        else:
+            formatted_date = currentdate.strftime("%d/%m/%Y")
+            formatted_time = currenttime.strftime("%H:%M:%S")
         return (formatted_time, formatted_date)
-
 
     def clear_console(self):
         clear = lambda: os.system('clear')
@@ -188,6 +273,6 @@ class machine_system:
 
 oper = machine_system()
 oper.load_file('Customer_data')
-print(oper.money(1144))
+print(oper.money(1625))
 
 
