@@ -53,7 +53,7 @@ class machine_system:
     def system_ticket(self, ticket_info):
         '''
         System ticket is a method that have input information
-        about customers full name and choosen ticket tipe.
+        about customers full name and choosen ticket type.
         Based on that method buys a ticket and puts to the database.
 
         :param ticket_info:
@@ -128,7 +128,7 @@ class machine_system:
         When cost is a number it returns the amount of funds
         after cost difference.
         example: money(1625,1325) does operation 16,25-13,25
-        and returns 30 which means 3zl 0gr or 30gr
+        and returns 30 which means 30gr
 
         :param funds:
         :type int:
@@ -153,7 +153,8 @@ class machine_system:
         if gr < 0:
             zl -= 1
             gr = 100 - difference
-        funds = f"{zl}{gr}"
+        gr = zl*100 + gr
+        funds = f"{gr}"
         return funds
 
     def buy_ticket(self, funds, ticket_type):
@@ -335,10 +336,10 @@ class machine_system:
                 line = f'{id},{fname},{lname},{ticket_type},{ticket_date},{funds}\n'
                 data_file.write(line)
 
-#oper = machine_system()
+oper = machine_system()
 #oper.error_log('Customer_data')
 #message = 'jkaxsca'
 #oper.error_log(None, message)
-#print(oper.money(1625))
+print(oper.money(1625,1623))
 
 
