@@ -119,7 +119,13 @@ class machine_system:
             self.error_log(PersonNotFoundError)
             raise PersonNotFoundError
 
-    def money(self, funds, cost=None):
+    def money_split(self, funds):
+        funds = int(funds)
+        zl = funds // 100
+        gr = funds % 100
+        return (zl, gr)
+
+    def charge_money(self, funds, cost):
         '''
         money method is a method with double task.
         When cost is None the function returns funds
@@ -136,12 +142,8 @@ class machine_system:
         :param cost:
         :type int:
         '''
-        funds = int(funds)
-        zl = funds // 100
-        gr = funds % 100
-        if cost is None:
-            return (zl, gr)
-
+        zl = funds[0]
+        gr = funds[1]
         costzl = cost // 100
         costgr = cost % 100
         zl = zl - costzl
@@ -170,20 +172,21 @@ class machine_system:
         :param ticket_type:
         :type string:
         '''
+        funds = self.money_split(funds)
         if ticket_type == '20min':
-            funds = self.money(funds, 340)
+            funds = self.charge_money(funds, 340)
         elif ticket_type == '75min':
-            funds = self.money(funds, 340)
+            funds = self.charge_money(funds, 340)
         elif ticket_type == '24h':
-            funds = self.money(funds, 340)
+            funds = self.charge_money(funds, 340)
         elif ticket_type == '72h':
-            funds = self.money(funds, 340)
+            funds = self.charge_money(funds, 340)
         elif ticket_type == '1m':
-            funds = self.money(funds, 340)
+            funds = self.charge_money(funds, 340)
         elif ticket_type == '3m':
-            funds = self.money(funds, 340)
+            funds = self.charge_money(funds, 340)
         elif ticket_type == '1y':
-            funds = self.money(funds, 340)
+            funds = self.charge_money(funds, 340)
         return funds
 
     def date_split(self, time):
@@ -335,11 +338,11 @@ class machine_system:
                 funds = person.funds
                 line = f'{id},{fname},{lname},{ticket_type},{ticket_date},{funds}\n'
                 data_file.write(line)
-
+'''
 oper = machine_system()
 #oper.error_log('Customer_data')
 #message = 'jkaxsca'
 #oper.error_log(None, message)
 print(oper.money(1625,1623))
-
+'''
 
