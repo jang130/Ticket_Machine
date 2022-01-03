@@ -68,10 +68,17 @@ class machine_system:
         date = self.time_module()[1]
         for person in self.customers:
             if fname == person.fname and lname == person.lname:
+                ticket_id = self.unique_id()
+                ticket_date = f'{time} {date}'
+                bought_ticket = ticket((ticket_id, ticket_type, ticket_date))
+                self.tickets.append(bought_ticket)
+                tickets = self.ticket_split(person)
+                tickets.append(ticket_id)
+                person.ticket_id.join(tickets)
                 funds = person.funds
-                tickets =  self.ticket_split(person)
                 person.funds = self.buy_ticket(funds, ticket_type)
                 self.write_file('Customer_data')
+                self.tickets_write('Ticket_data')
                 return
 
 
@@ -217,6 +224,15 @@ class machine_system:
         year = int(year)
         return (hour, minute, second, day, month, year)
 
+    def unique_id(self):
+        id = 0
+        for ticket in self.tickets:
+            id = str(id)
+            if ticket.ticket_id == id:
+                id = int(id)
+                id += 1
+        return str(id)
+
     def system_prepaid_check(self, name):
         '''
         system_prepaid_check is a method that checks the amount of
@@ -330,7 +346,7 @@ class machine_system:
 
         '''
         with open(path, 'w') as data_file:
-            data_file.write('id,first_name,last_name,ticket_type,ticket_date,funds\n')
+            data_file.write('id,first_name,last_name,ticket_id,funds\n')
             for person in self.customers:
                 id = person.id
                 fname = person.fname
@@ -349,8 +365,8 @@ class machine_system:
                     line = line.rstrip()
                     columns = line.split(',')
                     ticket_id, ticket_type, ticket_date = columns
-                    ticket = ticket(columns)
-                    self.tickets.append(ticket)
+                    ticket_unit = ticket(columns)
+                    self.tickets.append(ticket_unit)
         except FileNotFoundError:
             self.error_log(MissingFileError)
             raise MissingFileError
@@ -361,9 +377,8 @@ class machine_system:
             for ticket in self.tickets:
                 ticket_id = ticket.ticket_id
                 ticket_type = ticket.ticket_type
-                ticket_date = ticket_date
-                funds = ticket.funds
-                line = f'{ticket_id},{ticket_type},{ticket_date},{funds}\n'
+                ticket_date = ticket.ticket_date
+                line = f'{ticket_id},{ticket_type},{ticket_date}\n'
                 tickets_file.write(line)
 '''
 '''
@@ -371,9 +386,9 @@ oper = machine_system()
 #oper.error_log('Customer_data')
 #message = 'jkaxsca'
 #oper.error_log(None, message)
-#oper.tickets_load('Ticket_data')
-#oper.load_file('Customer_data')
+oper.tickets_load('Ticket_data')
+oper.load_file('Customer_data')
 #print(oper.ticket_split(oper.customers[0]))
-#print(oper.money(1625,1623))
+print(oper.unique_id())
 
 
