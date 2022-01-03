@@ -85,6 +85,7 @@ class machine_system:
                 person_found = True
                 self.write_file('Customer_data')
                 self.tickets_write('Ticket_data')
+                return 'Succeed'
         if person_found is False:
             self.error_log(PersonNotFoundError)
             raise PersonNotFoundError
@@ -118,9 +119,7 @@ class machine_system:
                 else:
                     self.error_log(TicketDoesNotExistError)
                     raise TicketDoesNotExistError
-            #else:
-             #   self.error_log(PersonNotFoundError)
-              #  raise PersonNotFoundError
+
 
     def calculate_expiry_date(self, customer):
             ticket = self.check_time_ticket_exists(customer)
@@ -397,14 +396,12 @@ class machine_system:
                 ticket_date = ticket.ticket_date
                 line = f'{ticket_id},{ticket_type},{ticket_date}\n'
                 tickets_file.write(line)
-'''
-'''
-oper = machine_system()
+#oper = machine_system()
 #oper.error_log('Customer_data')
 #message = 'jkaxsca'
 #oper.error_log(None, message)
-oper.tickets_load('Ticket_data')
-oper.load_file('Customer_data')
+#oper.tickets_load('Ticket_data')
+#oper.load_file('Customer_data')
 #print(oper.ticket_split(oper.customers[0]))
 #print(oper.system_check_ticket(('a','a')))
 

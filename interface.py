@@ -142,5 +142,5 @@ def check_ticket(language):
 def terminate():
     choose_language()
 
-choose_language()
+#choose_language()
 
