@@ -7,7 +7,6 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 
-
 class WrongOptionError(Exception):
     def __init__(self):
         super().__init__('Wrong choice')
@@ -28,9 +27,9 @@ class TicketDoesNotExistError(Exception):
         super().__init__('Customer does not have ticket')
 
 
-class IsNotTimeTicketError(Exception):
+class TimeTicketAlreadyExistsError(Exception):
     def __init__(self):
-        super().__init__('Ticket is not a period ticket')
+        super().__init__('There can only be one time ticket')
 
 
 class NotEnoughMoneyError(Exception):
@@ -66,24 +65,37 @@ class machine_system:
         fname, lname = name
         time = self.time_module()[0]
         date = self.time_module()[1]
-        for person in self.customers:
-            if fname == person.fname and lname == person.lname:
+        person_found = False
+        for customer in self.customers:
+            if fname == customer.fname and lname == customer.lname:
+                if ticket_type in ('1m','3m','1y'):
+                    exists =  self.check_time_ticket_exists(customer)
+                    if exists is not False:
+                        self.error_log(TimeTicketAlreadyExistsError)
+                        raise TimeTicketAlreadyExistsError
                 ticket_id = self.unique_id()
                 ticket_date = f'{time} {date}'
                 bought_ticket = ticket((ticket_id, ticket_type, ticket_date))
                 self.tickets.append(bought_ticket)
-                tickets = self.ticket_split(person)
+                tickets = self.ticket_split(customer)
                 tickets.append(ticket_id)
-                person.ticket_id.join(tickets)
-                funds = person.funds
-                person.funds = self.buy_ticket(funds, ticket_type)
+                customer.ticket_id = ';'.join(tickets)
+                funds = customer.funds
+                customer.funds = self.buy_ticket(funds, ticket_type)
+                person_found = True
                 self.write_file('Customer_data')
                 self.tickets_write('Ticket_data')
-                return
+        if person_found is False:
+            self.error_log(PersonNotFoundError)
+            raise PersonNotFoundError
 
-
-        self.error_log(PersonNotFoundError)
-        raise PersonNotFoundError
+    def check_time_ticket_exists(self, customer):
+        customer_tickets = self.ticket_split(customer)
+        for ticket in self.tickets:
+            if ticket.ticket_id in (customer_tickets):
+                if ticket.ticket_type in ('1m','3m','1y'):
+                    return ticket
+        return False
 
     def system_check_ticket(self, name):
         '''
@@ -97,35 +109,40 @@ class machine_system:
         '''
         fname = name[0]
         lname = name[1]
-        expiry = 0
-        for person in self.customers:
-            if fname == person.fname and lname == person.lname:
-                if person.ticket_date != 'None':
-                    time = person.ticket_date
-                    time = self.date_split(time)
-                    hour, minute, second, day, month, year = time
-                    time = datetime(year, month, day, hour, minute, second)
-                    if person.ticket_type == '1m':
-                        expiry = time + relativedelta(months=+1)
-                    elif person.ticket_type == '3m':
-                        expiry = time + relativedelta(months=+3)
-                    elif person.ticket_type == '1y':
-                        expiry = time + relativedelta(months=+12)
-                    elif person.ticket_type in ('20min', '75min', '24h', '72h'):
-                        self.error_log(IsNotTimeTicketError)
-                        raise IsNotTimeTicketError
+        for customer in self.customers:
+            if fname == customer.fname and lname == customer.lname:
+                exists = self.check_time_ticket_exists(customer)
+                if exists is not False:
+                    expiry_dates = self.calculate_expiry_date(customer)
+                    return expiry_dates
                 else:
                     self.error_log(TicketDoesNotExistError)
                     raise TicketDoesNotExistError
-        if expiry != 0:
+            #else:
+             #   self.error_log(PersonNotFoundError)
+              #  raise PersonNotFoundError
+
+    def calculate_expiry_date(self, customer):
+            ticket = self.check_time_ticket_exists(customer)
+            ticket_type = ticket.ticket_type
+            time = ticket.ticket_date
+            time = self.date_split(time)
+            hour, minute, second, day, month, year = time
+            time = datetime(year, month, day, hour, minute, second)
+            if ticket_type == '1m':
+                expiry = time + relativedelta(months=+1)
+            elif ticket_type == '3m':
+                expiry = time + relativedelta(months=+3)
+            elif ticket_type == '1y':
+                expiry = time + relativedelta(months=+12)
+            else:
+                self.error_log(TicketDoesNotExistError)
+                raise TicketDoesNotExistError
             return expiry
-        else:
-            self.error_log(PersonNotFoundError)
-            raise PersonNotFoundError
 
     def ticket_split(self, person):
             ticket_id = person.ticket_id
-            ticket_id = ticket_id.split(' ')
+            ticket_id = ticket_id.split(';')
             return ticket_id
 
     def money_split(self, funds):
@@ -389,6 +406,6 @@ oper = machine_system()
 oper.tickets_load('Ticket_data')
 oper.load_file('Customer_data')
 #print(oper.ticket_split(oper.customers[0]))
-print(oper.unique_id())
+#print(oper.system_check_ticket(('a','a')))
 
 
