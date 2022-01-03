@@ -1,9 +1,8 @@
-import english_interface
-import polish_interface
-import turkish_interface
+import Languages.English_interface
+import Languages.Polish_interface
+import Languages.Turkish_interface
 from system import WrongOptionError, machine_system
 import time
-
 
 operation = machine_system()
 
@@ -24,19 +23,19 @@ def choose_language():
 
 
 def english():
-    language = english_interface.EN(operation)
+    language = Languages.English_interface.EN(operation)
     language.menu()
     options(language)
 
 
 def polish():
-    language = polish_interface.PL(operation)
+    language = Languages.polish_interface.PL(operation)
     language.menu()
     options(language)
 
 
 def turkish():
-    language = turkish_interface.TR(operation)
+    language = Languages.turkish_interface.TR(operation)
     language.menu()
     options(language)
 
