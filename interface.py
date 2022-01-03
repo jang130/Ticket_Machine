@@ -8,6 +8,7 @@ operation = machine_system()
 
 def choose_language():
     operation.load_file('Customer_data')
+    operation.tickets_load('Ticket_data')
     operation.clear_console()
     print('Available languages: \n1.Polish\n2.English\n3.Turkish')
     option = operation.choice()
@@ -29,13 +30,13 @@ def english():
 
 
 def polish():
-    language = Languages.polish_interface.PL(operation)
+    language = Languages.Polish_interface.PL(operation)
     language.menu()
     options(language)
 
 
 def turkish():
-    language = Languages.turkish_interface.TR(operation)
+    language = Languages.Turkish_interface.TR(operation)
     language.menu()
     options(language)
 
