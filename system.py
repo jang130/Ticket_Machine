@@ -53,7 +53,7 @@ class machine_system:
         '''
         System ticket is a method that have input information
         about customers full name and choosen ticket type.
-        Based on that method buys a ticket and puts to the database.
+        Based on that method buys a paper and time ticket and puts to the database.
 
         :param ticket_info:
         :type tuple:
@@ -89,14 +89,6 @@ class machine_system:
             self.error_log(PersonNotFoundError)
             raise PersonNotFoundError
 
-    def check_time_ticket_exists(self, customer):
-        customer_tickets = self.ticket_split(customer)
-        for ticket in self.tickets:
-            if ticket.ticket_id in (customer_tickets):
-                if ticket.ticket_type in ('1m', '3m', '1y'):
-                    return ticket
-        return False
-
     def system_check_ticket(self, name):
         '''
         System check ticket is a method that checks
@@ -119,7 +111,34 @@ class machine_system:
                     self.error_log(TicketDoesNotExistError)
                     raise TicketDoesNotExistError
 
+    def check_time_ticket_exists(self, customer):
+        '''
+        check_time_ticket_exists is a method that takes customer object
+        as an input data and checks if he or she already has time ticket.
+        Every customer can have only one time ticket type at once.
+        When ticket found then method returns this ticket object else it
+        returns False.
+
+        :param customer:
+        :type object:
+        '''
+        customer_tickets = self.ticket_split(customer)
+        for ticket in self.tickets:
+            if ticket.ticket_id in (customer_tickets):
+                if ticket.ticket_type in ('1m', '3m', '1y'):
+                    return ticket
+        return False
+
     def calculate_expiry_date(self, customer):
+        '''
+        calculate_expiry_date is a method that takes customer
+        object as an input data and checks his time ticket
+        bought date. Based on that and ticket type the method
+        calculates the expiry date and returns as a datetime object
+
+        :param customer:
+        :type object:
+        '''
         ticket = self.check_time_ticket_exists(customer)
         ticket_type = ticket.ticket_type
         time = ticket.ticket_date
@@ -137,12 +156,31 @@ class machine_system:
             raise TicketDoesNotExistError
         return expiry
 
-    def ticket_split(self, person):
-        ticket_id = person.ticket_id
+    def ticket_split(self, customer):
+        '''
+        ticket_split is a method that reads customer object
+        as an input data and checks ticket_id column.
+        Based on that method splits ticket id's separated
+        by ; sign and returns owned tickets list.
+        Example [0,1,2,3]
+
+        :param customer:
+        :type object:
+        '''
+        ticket_id = customer.ticket_id
         ticket_id = ticket_id.split(';')
         return ticket_id
 
     def money_split(self, funds):
+        '''
+        money_split method is a method that uses funds in gr
+        as an input and returns them as a tuple of zl and gr
+        example: money(1625) returns (16, 25) input funds
+        are gr and output are (zl, gr).
+
+        :param funds:
+        :type string:
+        '''
         funds = int(funds)
         zl = funds // 100
         gr = funds % 100
@@ -150,17 +188,14 @@ class machine_system:
 
     def charge_money(self, funds, cost):
         '''
-        money method is a method with double task.
-        When cost is None the function returns funds
-        example: money(1625) returns (16, 25) input funds
-        are gr and output are (zl, gr).
-        When cost is a number it returns the amount of funds
-        after cost difference.
-        example: money(1625,1325) does operation 16,25-13,25
-        and returns 30 which means 30gr
+        charge_money method does a money transaction.
+        Input is a tuple of funds (zl, gr) and cost in gr.
+        Method returns fund after fund/cost difference.
+        example: charge_money((16,25),1325) does operation 16,25-13,25
+        and returns 300 which means 300gr.
 
         :param funds:
-        :type int:
+        :type tuple:
 
         :param cost:
         :type int:
@@ -199,17 +234,17 @@ class machine_system:
         if ticket_type == '20min':
             funds = self.charge_money(funds, 340)
         elif ticket_type == '75min':
-            funds = self.charge_money(funds, 340)
+            funds = self.charge_money(funds, 440)
         elif ticket_type == '24h':
-            funds = self.charge_money(funds, 340)
+            funds = self.charge_money(funds, 1500)
         elif ticket_type == '72h':
-            funds = self.charge_money(funds, 340)
+            funds = self.charge_money(funds, 3600)
         elif ticket_type == '1m':
-            funds = self.charge_money(funds, 340)
+            funds = self.charge_money(funds, 11000)
         elif ticket_type == '3m':
-            funds = self.charge_money(funds, 340)
+            funds = self.charge_money(funds, 28000)
         elif ticket_type == '1y':
-            funds = self.charge_money(funds, 340)
+            funds = self.charge_money(funds, 44000)
         return funds
 
     def date_split(self, time):
@@ -239,6 +274,11 @@ class machine_system:
         return (hour, minute, second, day, month, year)
 
     def unique_id(self):
+        '''
+        unique_id is a method that returns to each
+        bought ticket id that none previous ticket had.
+        The id's are growing one by one.
+        '''
         id = 0
         for ticket in self.tickets:
             id = str(id)
@@ -248,6 +288,15 @@ class machine_system:
         return str(id)
 
     def system_prepaid_check(self, name):
+        '''
+        system_prepaid_check is a method that takes name
+        in (fname, lname) tuple and seraches in data base matching
+        customer, then the customer is runned in the finding method.
+        After finding tickets id's function returns theese tickets.
+
+        :param name:
+        :type tuple:
+        '''
         fname = name[0]
         lname = name[1]
         for customer in self.customers:
@@ -262,6 +311,15 @@ class machine_system:
         raise PersonNotFoundError
 
     def find_prepaid_tickets(self, customer):
+        '''
+        find_prepaid_tickets is a method that takes name
+        in (fname, lname) tuple and searches for prepaid tickets
+        under given customer's object. Found tickets are added to a list
+        and returned.
+
+        :param customer:
+        :type object:
+        '''
         customer_tickets = self.ticket_split(customer)
         prepaid_tickets = []
         for ticket in self.tickets:
@@ -285,7 +343,7 @@ class machine_system:
         lname = name[1]
         for person in self.customers:
             if fname == person.fname and lname == person.lname:
-                return self.money(person.funds)
+                return self.money_split(person.funds)
         self.error_log(PersonNotFoundError)
         raise PersonNotFoundError
 
@@ -327,8 +385,8 @@ class machine_system:
     def load_file(self, path):
         '''
         load_file is a method that reads database file from
-        given path and it create list of customer's objects.
-        used to read Customer_data.
+        given path and creates list of customer's objects.
+        Used to read Customer_data.
 
         :param path:
         :type string:
@@ -350,7 +408,17 @@ class machine_system:
     def error_log(self, error=None, message=None):
         '''
         problem_report is  a method that saves actual state of machine
-        and does the error report file.
+        and does the error report file. When the error attribute contains
+        error Error_log is being updatet with a new error with a time stamp.
+        When the message contains text. Method is cloning Error_log
+        and putting inside describing problem message which
+        generates to Problem_report.txt.
+
+        :param error:
+        :type error class:
+
+        :param message:
+        :type string:
         '''
         time = self.time_module()[0]
         date = self.time_module()[1]
@@ -391,6 +459,14 @@ class machine_system:
                 data_file.write(line)
 
     def tickets_load(self, path):
+        '''
+        tickets_file is a method that reads ticket database file from
+        given path and creates list of ticket's objects.
+        Used to read Ticket_data.
+
+        :param path:
+        :type string:
+        '''
         try:
             with open(path, 'r') as tickets_file:
                 self.tickets = []
@@ -406,6 +482,10 @@ class machine_system:
             raise MissingFileError
 
     def tickets_write(self, path):
+        '''
+        tickets_write is a method that overwrites ticket_data
+        with a new tickets (if available).
+        '''
         with open(path, 'w') as tickets_file:
             tickets_file.write('ticket_id,ticket_type,ticket_date\n')
             for ticket in self.tickets:
@@ -417,6 +497,12 @@ class machine_system:
 
 
     def files_reset(self):
+        '''
+        file_reset is a method that clears Ticket_data from tickets
+        and Customers_data from ticket_id. Customer_data is being
+        overwirtten by Pattern_customer_data. Which contains sample
+        database of customers with id's,names and funds.
+        '''
         with open('Ticket_data', 'w') as tickets_file:
             tickets_file.write('ticket_id,ticket_type,ticket_date\n')
         with open('Pattern_Customer_data', "r") as reset:
@@ -438,4 +524,4 @@ class machine_system:
 #for ticket in prepaid_tickets:
 #    index = prepaid_tickets.index(ticket)
 #    output += f'{prepaid_tickets[index]}\n'
-#print(output)
+#print(oper.charge_money((15,50), 1230))
