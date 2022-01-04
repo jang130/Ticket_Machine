@@ -1,3 +1,4 @@
+from os import name
 from system import TicketAlreadyExistsError, TimeTicketAlreadyExistsError, machine_system
 import pytest
 
@@ -21,11 +22,26 @@ def test_machine_system_class_buy_two_time_tickets():
     operation.files_reset()
     operation.load_file('Customer_data')
     operation.tickets_load('Ticket_data')
-    short_term_ticket =(('Doralyn','Dovermann'),'20min')
     time_ticket = (('Doralyn','Dovermann'),'1y')
     with pytest.raises(TimeTicketAlreadyExistsError):
         assert operation.system_ticket(time_ticket) == 'Succeed'
         assert operation.system_ticket(time_ticket) == 'Succeed'
+
+
+def test_machine_system_class_check_time_ticket():
+    operation = machine_system()
+    operation.files_reset()
+    operation.load_file('Customer_data')
+    operation.tickets_load('Ticket_data')
+    time_ticket = (('Doralyn','Dovermann'),'1y')
+    customer = operation.customers[0]
+    assert operation.system_ticket(time_ticket) == 'Succeed'
+    name = (('Doralyn','Dovermann'))
+    check_ticket = operation.system_check_ticket(name)
+    expiry = operation.calculate_expiry_date(customer)
+    assert check_ticket == expiry
+
+
 
 
 
