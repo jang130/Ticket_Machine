@@ -250,8 +250,35 @@ class machine_system:
         return str(id)
 
     def system_prepaid_check(self, name):
+        fname = name[0]
+        lname = name[1]
+        for customer in self.customers:
+            if fname == customer.fname and lname == customer.lname:
+                prepaid_tickets = self.find_prepaid_tickets(customer)
+                if len(prepaid_tickets) == 0:
+                    self.error_log(TicketDoesNotExistError)
+                    raise TicketDoesNotExistError
+                else:
+                    return prepaid_tickets
+        self.error_log(PersonNotFoundError)
+        raise PersonNotFoundError
+
+
+    def find_prepaid_tickets(self, customer):
+        customer_tickets = self.ticket_split(customer)
+        prepaid_tickets = []
+        for ticket in self.tickets:
+            if ticket.ticket_id in (customer_tickets):
+                if ticket.ticket_type.isdigit():
+                    prepaid_tickets.append(ticket.ticket_type)
+        return prepaid_tickets
+
+
+
+
+    def system_funds_check(self, name):
         '''
-        system_prepaid_check is a method that checks the amount of
+        system_funds_check is a method that checks the amount of
         funds in database for a given customer and using one functionality
         from money method returns funds splitted to zl (złoty) and gr (grosz).
 
@@ -396,13 +423,20 @@ class machine_system:
                 ticket_date = ticket.ticket_date
                 line = f'{ticket_id},{ticket_type},{ticket_date}\n'
                 tickets_file.write(line)
-#oper = machine_system()
+'''
+oper = machine_system()
 #oper.error_log('Customer_data')
 #message = 'jkaxsca'
 #oper.error_log(None, message)
-#oper.tickets_load('Ticket_data')
-#oper.load_file('Customer_data')
+oper.tickets_load('Ticket_data')
+oper.load_file('Customer_data')
 #print(oper.ticket_split(oper.customers[0]))
-#print(oper.system_check_ticket(('a','a')))
-
+print(oper.system_prepaid_check(('a','a')))
+prepaid_tickets =oper.system_prepaid_check(('a','a'))
+output = ''
+for ticket in prepaid_tickets:
+    index = prepaid_tickets.index(ticket)
+    output += f'{prepaid_tickets[index]}\n'
+print(output)
+'''
 

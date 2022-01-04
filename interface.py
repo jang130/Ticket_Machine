@@ -57,13 +57,17 @@ def options(language):
         language.check_ticket(expiry)
     elif option == '4':
         state = 4
-        funds = operation.system_prepaid_check(prepaid_check(language))
-        language.prepaid_check(funds)
+        funds = operation.system_funds_check(funds_check(language))
+        language.funds_check(funds)
     elif option == '5':
         state = 5
-        problem_report(language, state)
+        prepaid_tickets = operation.system_prepaid_check(funds_check(language))
+        language.prepaid_check(prepaid_tickets)
     elif option == '6':
         state = 6
+        problem_report(language, state)
+    elif option == '7':
+        state = 7
         language.terminate()
         time.sleep(3)
         terminate()
@@ -109,9 +113,10 @@ def time_ticket_type(language):
         raise WrongOptionError
     return ticket_type
 
-def prepaid_check(language):
+def funds_check(language):
     name = personal_data(language)
     return name
+
 
 def personal_data(language):
     language.personal_data('first')
@@ -142,5 +147,5 @@ def check_ticket(language):
 def terminate():
     choose_language()
 
-#choose_language()
+choose_language()
 
