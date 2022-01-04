@@ -1,5 +1,4 @@
 from datetime import datetime, date
-from time import time
 from customer_class import customer
 from ticket_class import ticket
 import os
@@ -68,8 +67,8 @@ class machine_system:
         person_found = False
         for customer in self.customers:
             if fname == customer.fname and lname == customer.lname:
-                if ticket_type in ('1m','3m','1y'):
-                    exists =  self.check_time_ticket_exists(customer)
+                if ticket_type in ('1m', '3m', '1y'):
+                    exists = self.check_time_ticket_exists(customer)
                     if exists is not False:
                         self.error_log(TimeTicketAlreadyExistsError)
                         raise TimeTicketAlreadyExistsError
@@ -94,7 +93,7 @@ class machine_system:
         customer_tickets = self.ticket_split(customer)
         for ticket in self.tickets:
             if ticket.ticket_id in (customer_tickets):
-                if ticket.ticket_type in ('1m','3m','1y'):
+                if ticket.ticket_type in ('1m', '3m', '1y'):
                     return ticket
         return False
 
@@ -120,29 +119,28 @@ class machine_system:
                     self.error_log(TicketDoesNotExistError)
                     raise TicketDoesNotExistError
 
-
     def calculate_expiry_date(self, customer):
-            ticket = self.check_time_ticket_exists(customer)
-            ticket_type = ticket.ticket_type
-            time = ticket.ticket_date
-            time = self.date_split(time)
-            hour, minute, second, day, month, year = time
-            time = datetime(year, month, day, hour, minute, second)
-            if ticket_type == '1m':
-                expiry = time + relativedelta(months=+1)
-            elif ticket_type == '3m':
-                expiry = time + relativedelta(months=+3)
-            elif ticket_type == '1y':
-                expiry = time + relativedelta(months=+12)
-            else:
-                self.error_log(TicketDoesNotExistError)
-                raise TicketDoesNotExistError
-            return expiry
+        ticket = self.check_time_ticket_exists(customer)
+        ticket_type = ticket.ticket_type
+        time = ticket.ticket_date
+        time = self.date_split(time)
+        hour, minute, second, day, month, year = time
+        time = datetime(year, month, day, hour, minute, second)
+        if ticket_type == '1m':
+            expiry = time + relativedelta(months=+1)
+        elif ticket_type == '3m':
+            expiry = time + relativedelta(months=+3)
+        elif ticket_type == '1y':
+            expiry = time + relativedelta(months=+12)
+        else:
+            self.error_log(TicketDoesNotExistError)
+            raise TicketDoesNotExistError
+        return expiry
 
     def ticket_split(self, person):
-            ticket_id = person.ticket_id
-            ticket_id = ticket_id.split(';')
-            return ticket_id
+        ticket_id = person.ticket_id
+        ticket_id = ticket_id.split(';')
+        return ticket_id
 
     def money_split(self, funds):
         funds = int(funds)
@@ -263,7 +261,6 @@ class machine_system:
         self.error_log(PersonNotFoundError)
         raise PersonNotFoundError
 
-
     def find_prepaid_tickets(self, customer):
         customer_tickets = self.ticket_split(customer)
         prepaid_tickets = []
@@ -272,9 +269,6 @@ class machine_system:
                 if ticket.ticket_type.isdigit():
                     prepaid_tickets.append(ticket.ticket_type)
         return prepaid_tickets
-
-
-
 
     def system_funds_check(self, name):
         '''
@@ -294,7 +288,6 @@ class machine_system:
                 return self.money(person.funds)
         self.error_log(PersonNotFoundError)
         raise PersonNotFoundError
-
 
     def choice(self):
         '''
@@ -364,17 +357,15 @@ class machine_system:
         try:
             with open('Error_logs', "r") as log:
                 data = log.read()
-            if message is  None:
+            if message is None:
                 error = str(error)
                 with open('Error_logs', "w") as log:
                     log.write(data)
                     log.write(f'\n{time} {date} Error:{error}')
             elif error is None:
                 with open('Problem_report', "w") as log:
-                        log.write(f'\n{message}')
-                        log.write(data)
-            else:
-                pass
+                    log.write(f'\n{message}')
+                    log.write(data)
         except FileNotFoundError:
             self.error_log(MissingFileError)
             raise MissingFileError
@@ -423,20 +414,28 @@ class machine_system:
                 ticket_date = ticket.ticket_date
                 line = f'{ticket_id},{ticket_type},{ticket_date}\n'
                 tickets_file.write(line)
-'''
-oper = machine_system()
+
+
+    def files_reset(self):
+        with open('Ticket_data', 'w') as tickets_file:
+            tickets_file.write('ticket_id,ticket_type,ticket_date\n')
+        with open('Pattern_Customer_data', "r") as reset:
+            data = reset.read()
+        with open('Customer_data', "w") as reset:
+            reset.write(data)
+
+
+#oper = machine_system()
 #oper.error_log('Customer_data')
 #message = 'jkaxsca'
 #oper.error_log(None, message)
-oper.tickets_load('Ticket_data')
-oper.load_file('Customer_data')
+#oper.tickets_load('Ticket_data')
+#oper.load_file('Customer_data')
 #print(oper.ticket_split(oper.customers[0]))
-print(oper.system_prepaid_check(('a','a')))
-prepaid_tickets =oper.system_prepaid_check(('a','a'))
-output = ''
-for ticket in prepaid_tickets:
-    index = prepaid_tickets.index(ticket)
-    output += f'{prepaid_tickets[index]}\n'
-print(output)
-'''
-
+#print(oper.system_prepaid_check(('a','a')))
+#prepaid_tickets =oper.system_prepaid_check(('a','a'))
+#output = ''
+#for ticket in prepaid_tickets:
+#    index = prepaid_tickets.index(ticket)
+#    output += f'{prepaid_tickets[index]}\n'
+#print(output)
