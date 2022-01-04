@@ -25,7 +25,7 @@ class EN:
     def time_ticket_type(self):
         self.operation.clear_console()
         print(self.date)
-        print('Wybierz typ biletu:')
+        print('Choose ticket type:')
         print('1. Monthly\n2. 3 Months')
         print('3. Yearly')
 
