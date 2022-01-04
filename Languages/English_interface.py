@@ -14,7 +14,7 @@ class EN:
         print('Ticket Machine\n\rChoose an option: ')
         print('1. Paper ticket purchase\n\r2. Long term tickets purchase')
         print('3. Check ticket expiration\n\r4. Check amount of funds')
-        print('5. Report problem\n\r6. Terminate')
+        print('5. Check prepaid tickets\n6. Report problem\n7. Terminate')
 
     def paper_ticket_type(self):
         self.operation.clear_console()
@@ -51,7 +51,17 @@ class EN:
         print(self.date)
         print('The operation is successful.')
 
-    def prepaid_check(self, funds):
+    def prepaid_check(self, prepaid_tickets):
+        self.operation.clear_console()
+        print(self.date)
+        output = ''
+        for ticket in prepaid_tickets:
+            index = prepaid_tickets.index(ticket)
+            output += f'{prepaid_tickets[index]}zł\n'
+        print('Available tickets:')
+        print(output)
+
+    def funds_check(self, funds):
         self.operation.clear_console()
         print(self.date)
         print(f'Available funds: {funds[0]}.{funds[1]} zł')

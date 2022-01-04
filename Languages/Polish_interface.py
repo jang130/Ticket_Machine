@@ -13,8 +13,8 @@ class PL:
         print(self.date)
         print('Biletomat\n\rWybierz opcje: ')
         print('1. Zakup biletu kartonikowego\n\r2. Zakup biletu okresowego')
-        print('3. Sprawdzenie ważności biletu\n\r4. Sprawdzenie środków')
-        print('5. Zgłoś problem\n\r6. Zakończ')
+        print('3. Sprawdzenie ważności biletu\n4. Sprawdzenie środków')
+        print('5. Sprawdzenie biletów prepaid\n6. Zgłoś problem\n7. Zakończ')
 
     def paper_ticket_type(self):
         self.operation.clear_console()
@@ -52,7 +52,17 @@ class PL:
         print(self.date)
         print('Operacja zakończona Powodzeniem.')
 
-    def prepaid_check(self, funds):
+    def prepaid_check(self, prepaid_tickets):
+        self.operation.clear_console()
+        print(self.date)
+        output = ''
+        for ticket in prepaid_tickets:
+            index = prepaid_tickets.index(ticket)
+            output += f'{prepaid_tickets[index]}zł\n'
+        print('Dostępne bilety:')
+        print(output)
+
+    def funds_check(self, funds):
         self.operation.clear_console()
         print(self.date)
         print(f'Dostępne środki:{funds[0]}.{funds[1]}zł')
