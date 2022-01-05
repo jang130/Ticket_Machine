@@ -1,4 +1,3 @@
-from interface import choose_language
+import interface
 
-def run_program():
-    choose_language()
+interface.choose_language()
