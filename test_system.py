@@ -1,6 +1,7 @@
 from os import name
-from system import NotEnoughMoneyError, TicketAlreadyExistsError, TimeTicketAlreadyExistsError, machine_system
+from system import NotEnoughMoneyError, PersonNotFoundError, TicketDoesNotExistError, TimeTicketAlreadyExistsError, machine_system
 import pytest
+import io
 
 def test_system():
     machine = machine_system()
@@ -54,7 +55,7 @@ def test_ticket_split():
     operation.system_ticket(ticket3)
     customer = operation.customers[0]
     ticket_split = operation.ticket_split(customer)
-    assert ticket_split == ['', '0', '1', '2']
+    assert ticket_split == ['1', '2', '3', '4']
 
 
 def test_money_split():
@@ -108,13 +109,73 @@ def test_unique_id_for_ticket_method():
     operation.files_reset()
     operation.load_file('Customer_data')
     operation.tickets_load('Ticket_data')
-    assert operation.unique_id() == '0'
+    assert operation.unique_id() == '2'
+
+
+def test_system_prepaid_check_method():
+    operation = machine_system()
+    operation.files_reset()
+    operation.load_file('Customer_data')
+    operation.tickets_load('Ticket_data')
+    prepaid = operation.system_prepaid_check(('Doralyn','Dovermann'))
+    assert prepaid == ['26']
+
+def test_system_prepaid_check_method_missing_person():
+    operation = machine_system()
+    operation.files_reset()
+    operation.load_file('Customer_data')
+    operation.tickets_load('Ticket_data')
+    with pytest.raises(PersonNotFoundError):
+        operation.system_prepaid_check(('Doralyn','Doralyn'))
+
+
+
+def test_system_prepaid_check_method_missing_ticket():
+    operation = machine_system()
+    operation.files_reset()
+    operation.load_file('Customer_data')
+    operation.tickets_load('Ticket_data')
+    with pytest.raises(TicketDoesNotExistError):
+        operation.system_prepaid_check(('Whitney','Girardoni'))
+
+
+def test_system_funds_check_method():
+    operation = machine_system()
+    operation.files_reset()
+    operation.load_file('Customer_data')
+    operation.tickets_load('Ticket_data')
+    funds = operation.system_funds_check(('Whitney','Girardoni'))
+    assert funds == (1000, 0)
+
+
+def test_system_funds_check_method_missing_person():
+    operation = machine_system()
+    operation.files_reset()
+    operation.load_file('Customer_data')
+    operation.tickets_load('Ticket_data')
+    with pytest.raises(PersonNotFoundError):
+        operation.system_funds_check(('Whitney','Whitney'))
+
+def test_choice(monkeypatch):
+    operation = machine_system()
+    monkeypatch.setattr('sys.stdin', io.StringIO('1'))
+    choice = operation.choice()
+    assert choice == '1'
+    monkeypatch.setattr('sys.stdin', io.StringIO('2'))
+    choice = operation.choice()
+    assert choice == '2'
+
+
+def test_time_module():
 
 
 
 
-    #monkeypatch.setattr('system.machine_system.choice', choice())
-    #monkeypatch.setattr('system.machine_system', operation.choice())
-    #assert operation.choice() == '2'
+
+
+
+#monkeypatch.setattr('system.machine_system.choice', choice())
+#monkeypatch.setattr('system.machine_system', operation.choice())
+#assert operation.choice() == '2'
 #operation.write_file('Customer_data')
 #operation.tickets_write('Ticket_data')
