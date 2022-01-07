@@ -2,9 +2,10 @@ from os import name
 from system import NotEnoughMoneyError, PersonNotFoundError, TicketDoesNotExistError, TimeTicketAlreadyExistsError, machine_system
 import pytest
 import io
+from datetime import datetime, date
 
 def test_system():
-    machine = machine_system()
+    machine_system()
 
 def test_machine_system_class_buy_any_ticket():
     operation = machine_system()
@@ -60,11 +61,11 @@ def test_ticket_split():
 
 def test_money_split():
     operation = machine_system()
-    funds=1800
+    funds = 1800
     for i in range(100):
         money_split = operation.money_split(funds)
-        assert money_split == (18,i)
-        funds +=1
+        assert money_split == (18, i)
+        funds += 1
 
 
 def test_charge_money():
@@ -74,12 +75,14 @@ def test_charge_money():
     charge_money = operation.charge_money(funds, cost)
     assert charge_money == ('320')
 
+
 def test_charge_money_insufficient_funds():
     operation = machine_system()
     funds = (15, 50)
     cost = 1600
     with pytest.raises(NotEnoughMoneyError):
         operation.charge_money(funds, cost)
+
 
 def test_buy_ticket_method():
     operation = machine_system()
@@ -167,15 +170,13 @@ def test_choice(monkeypatch):
 
 
 def test_time_module():
+    operation = machine_system()
+    today = date.today().strftime("%d/%m/%Y")
+    time = datetime.now().strftime("%H:%M")
+    assert operation.time_module(False) == (time, today)
+    today = date.today().strftime("%d/%m/%Y")
+    time = datetime.now().strftime("%H:%M:%S")
+    assert operation.time_module(True) == (time, today)
 
 
-
-
-
-
-
-#monkeypatch.setattr('system.machine_system.choice', choice())
-#monkeypatch.setattr('system.machine_system', operation.choice())
-#assert operation.choice() == '2'
-#operation.write_file('Customer_data')
-#operation.tickets_write('Ticket_data')
+def test_load_file()
