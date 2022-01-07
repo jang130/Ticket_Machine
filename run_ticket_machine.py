@@ -1,3 +1,3 @@
 import interface
 
-interface.choose_language()
+interface.ticket_machine_init()

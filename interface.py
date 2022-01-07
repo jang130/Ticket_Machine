@@ -3,13 +3,21 @@ import Languages.Polish_interface
 import Languages.Turkish_interface
 from system import WrongOptionError, machine_system
 import time
+from settings import get_databases
 
-operation = machine_system()
+Databases = get_databases()
+operation = machine_system(Databases)
+
+
+def ticket_machine_init():
+    ticket_data = Databases[0]
+    customer_data = Databases[1]
+    operation.load_file(customer_data)
+    operation.tickets_load(ticket_data)
+    choose_language()
 
 
 def choose_language():
-    operation.load_file('Customer_data')
-    operation.tickets_load('Ticket_data')
     operation.clear_console()
     print('Available languages: \n1.Polish\n2.English\n3.Turkish')
     option = operation.choice()

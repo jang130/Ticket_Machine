@@ -12,7 +12,7 @@ class PL:
         self.operation.clear_console()
         print(self.date)
         print('Biletomat\n\rWybierz opcje: ')
-        print('1. Zakup biletu kartonikowego\n\r2. Zakup biletu okresowego')
+        print('1. Zakup biletu kartonikowego\n2. Zakup biletu okresowego')
         print('3. Sprawdzenie ważności biletu\n4. Sprawdzenie środków')
         print('5. Sprawdzenie biletów prepaid\n6. Zgłoś problem\n7. Zakończ')
 

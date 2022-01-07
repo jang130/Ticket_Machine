@@ -11,10 +11,11 @@ class TR:
     def menu(self):
         self.operation.clear_console()
         print(self.date)
-        print('Bilet Makinesi\n\rBir seçeneği seç: ')
-        print('1. Kağıt bilet satın al\n\r2. Uzun süreli bilet al')
-        print('3. Bilet tükenme tarihine bak\n\r4. Kaynaklara bak')
-        print('5. Problem bildir\n\r6. Bitir')
+        print('Bilet Makinesi\nBir seçeneği seç: ')
+        print('1. Kağıt bilet satın al\n2. Uzun süreli bilet al')
+        print('3. Bilet tükenme tarihine bak\n4. Kaynaklara bak')
+        print('5. Bakiye yüklenebilir biletlere bak:')
+        print('6. Problem bildir\n7. Bitir')
 
     def paper_ticket_type(self):
         self.operation.clear_console()
@@ -58,7 +59,7 @@ class TR:
         for ticket in prepaid_tickets:
             index = prepaid_tickets.index(ticket)
             output += f'{prepaid_tickets[index]}zł\n'
-        print('Available tickets:')
+        print('Mevcut Biletler:')
         print(output)
 
     def funds_check(self, funds):
