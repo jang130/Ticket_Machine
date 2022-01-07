@@ -51,7 +51,17 @@ class TR:
         print(self.date)
         print('Satın alımı başarılı.')
 
-    def prepaid_check(self, funds):
+    def prepaid_check(self, prepaid_tickets):
+        self.operation.clear_console()
+        print(self.date)
+        output = ''
+        for ticket in prepaid_tickets:
+            index = prepaid_tickets.index(ticket)
+            output += f'{prepaid_tickets[index]}zł\n'
+        print('Available tickets:')
+        print(output)
+
+    def funds_check(self, funds):
         self.operation.clear_console()
         print(self.date)
         print(f'Mevcut Kaynaklar: {funds[0]}.{funds[1]} zł')
@@ -65,4 +75,3 @@ class TR:
         self.operation.clear_console()
         print(self.date)
         print('Lütfen hata mesajını giriniz:')
-
