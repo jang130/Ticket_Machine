@@ -2,8 +2,11 @@ from datetime import datetime, date
 from customer_class import customer
 from ticket_class import ticket
 import os
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
+
+class WrongAmountOfAtributesInClassError(Exception):
+    def __init__(self):
+        super().__init__('Cannot generate object too many or to less atributes')
 
 
 class WrongOptionError(Exception):
@@ -53,7 +56,8 @@ class machine_system:
         '''
         System ticket is a method that have input information
         about customers full name and choosen ticket type.
-        Based on that method buys a paper and time ticket and puts to the database.
+        Based on that method buys a paper and time ticket and
+        puts to the database.
 
         :param ticket_info:
         :type tuple:
@@ -437,6 +441,9 @@ class machine_system:
         except FileNotFoundError:
             self.error_log(MissingFileError)
             raise MissingFileError
+        except ValueError:
+            self.error_log(WrongAmountOfAtributesInClassError)
+            raise WrongAmountOfAtributesInClassError
 
     def write_file(self, path):
         '''
@@ -480,6 +487,9 @@ class machine_system:
         except FileNotFoundError:
             self.error_log(MissingFileError)
             raise MissingFileError
+        except ValueError:
+            self.error_log(WrongAmountOfAtributesInClassError)
+            raise WrongAmountOfAtributesInClassError
 
     def tickets_write(self, path):
         '''
@@ -495,7 +505,6 @@ class machine_system:
                 line = f'{ticket_id},{ticket_type},{ticket_date}\n'
                 tickets_file.write(line)
 
-
     def files_reset(self):
         '''
         file_reset is a method that clears Ticket_data from tickets
@@ -503,8 +512,10 @@ class machine_system:
         overwirtten by Pattern_customer_data. Which contains sample
         database of customers with id's,names and funds.
         '''
-        with open('Ticket_data', 'w') as tickets_file:
-            tickets_file.write('ticket_id,ticket_type,ticket_date\n')
+        with open('Pattern_Ticket_data', "r") as reset:
+            data = reset.read()
+        with open('Ticket_data', 'w') as reset:
+            reset.write(data)
         with open('Pattern_Customer_data', "r") as reset:
             data = reset.read()
         with open('Customer_data', "w") as reset:
