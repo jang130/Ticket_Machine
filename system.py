@@ -49,9 +49,13 @@ class machine_system:
     System class that does all of
     the needed file and computing operations
     '''
-    def __init__(self):
-        pass
-
+    def __init__(self, Databases):
+        self.ticket_data = Databases[0]
+        self.customer_data = Databases[1]
+        self.pattern_customer_data = Databases[2]
+        self.pattern_ticket_data = Databases[3]
+        self.problem_report = Databases[4]
+        self.error_logs = Databases[5]
     def system_ticket(self, ticket_info):
         '''
         System ticket is a method that have input information
@@ -86,8 +90,8 @@ class machine_system:
                 funds = customer.funds
                 customer.funds = self.buy_ticket(funds, ticket_type)
                 person_found = True
-                self.write_file('Customer_data')
-                self.tickets_write('Ticket_data')
+                self.write_file(self.customer_data)
+                self.tickets_write(self.ticket_data)
                 return 'Succeed'
         if person_found is False:
             self.error_log(PersonNotFoundError)
@@ -427,15 +431,15 @@ class machine_system:
         time = self.time_module()[0]
         date = self.time_module()[1]
         try:
-            with open('Error_logs', "r") as log:
+            with open(self.error_logs, "r") as log:
                 data = log.read()
             if message is None:
                 error = str(error)
-                with open('Error_logs', "w") as log:
+                with open(self.error_logs, "w") as log:
                     log.write(data)
                     log.write(f'\n{time} {date} Error:{error}')
             elif error is None:
-                with open('Problem_report', "w") as log:
+                with open(self.problem_report, "w") as log:
                     log.write(f'\n{message}')
                     log.write(data)
         except FileNotFoundError:
@@ -512,13 +516,13 @@ class machine_system:
         overwirtten by Pattern_customer_data. Which contains sample
         database of customers with id's,names and funds.
         '''
-        with open('Pattern_Ticket_data', "r") as reset:
+        with open(self.pattern_ticket_data, "r") as reset:
             data = reset.read()
-        with open('Ticket_data', 'w') as reset:
+        with open(self.ticket_data, 'w') as reset:
             reset.write(data)
-        with open('Pattern_Customer_data', "r") as reset:
+        with open(self.pattern_customer_data, "r") as reset:
             data = reset.read()
-        with open('Customer_data', "w") as reset:
+        with open(self.customer_data, "w") as reset:
             reset.write(data)
 
 
