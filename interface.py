@@ -6,6 +6,7 @@ import time
 
 operation = machine_system()
 
+
 def choose_language():
     operation.load_file('Customer_data')
     operation.tickets_load('Ticket_data')
@@ -78,10 +79,12 @@ def options(language):
     language.terminate()
     terminate()
 
+
 def paper_ticket(language):
     ticket_type = paper_ticket_type(language)
     name = personal_data(language)
     return (name, ticket_type)
+
 
 def paper_ticket_type(language):
     language.paper_ticket_type()
@@ -99,6 +102,7 @@ def paper_ticket_type(language):
         raise WrongOptionError
     return ticket_type
 
+
 def time_ticket_type(language):
     language.time_ticket_type()
     option = operation.choice()
@@ -113,6 +117,7 @@ def time_ticket_type(language):
         raise WrongOptionError
     return ticket_type
 
+
 def funds_check(language):
     name = personal_data(language)
     return name
@@ -125,6 +130,7 @@ def personal_data(language):
     lname = operation.choice()
     name = (fname, lname)
     return name
+
 
 def time_ticket(language):
     ticket_type = time_ticket_type(language)
@@ -146,6 +152,3 @@ def check_ticket(language):
 
 def terminate():
     choose_language()
-
-choose_language()
-
