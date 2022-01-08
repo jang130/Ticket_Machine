@@ -351,3 +351,65 @@ problem
 18:49:18 07/01/2022 Error:<class 'system.MissingFileError'>
 18:49:18 07/01/2022 Error:<class 'system.MissingFileError'>
 18:49:18 07/01/2022 Error:Sample error description
+11:27:26 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:30:02 08/01/2022 Error:<class 'system.TimeTicketAlreadyExistsError'>
+11:31:38 08/01/2022 Error:<class 'system.TimeTicketAlreadyExistsError'>
+11:31:38 08/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:31:38 08/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:31:38 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:31:38 08/01/2022 Error:<class 'system.TicketDoesNotExistError'>
+11:31:38 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:31:38 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:38 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:38 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:38 08/01/2022 Error:Sample error description
+11:31:42 08/01/2022 Error:<class 'system.TimeTicketAlreadyExistsError'>
+11:31:42 08/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:31:42 08/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:31:42 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:31:42 08/01/2022 Error:<class 'system.TicketDoesNotExistError'>
+11:31:42 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:31:42 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:42 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:42 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:42 08/01/2022 Error:Sample error description
+11:31:43 08/01/2022 Error:<class 'system.TimeTicketAlreadyExistsError'>
+11:31:43 08/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:31:43 08/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:31:43 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:31:43 08/01/2022 Error:<class 'system.TicketDoesNotExistError'>
+11:31:43 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:31:43 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:43 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:43 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:43 08/01/2022 Error:Sample error description
+11:31:44 08/01/2022 Error:<class 'system.TimeTicketAlreadyExistsError'>
+11:31:44 08/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:31:44 08/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:31:44 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:31:44 08/01/2022 Error:<class 'system.TicketDoesNotExistError'>
+11:31:44 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:31:44 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:44 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:44 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:44 08/01/2022 Error:Sample error description
+11:31:45 08/01/2022 Error:<class 'system.TimeTicketAlreadyExistsError'>
+11:31:45 08/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:31:45 08/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:31:45 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:31:45 08/01/2022 Error:<class 'system.TicketDoesNotExistError'>
+11:31:45 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:31:45 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:45 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:45 08/01/2022 Error:<class 'system.MissingFileError'>
+11:31:45 08/01/2022 Error:Sample error description
+11:33:58 08/01/2022 Error:<class 'system.TimeTicketAlreadyExistsError'>
+11:33:58 08/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:33:58 08/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:33:58 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:33:58 08/01/2022 Error:<class 'system.TicketDoesNotExistError'>
+11:33:58 08/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:33:58 08/01/2022 Error:<class 'system.MissingFileError'>
+11:33:58 08/01/2022 Error:<class 'system.MissingFileError'>
+11:33:58 08/01/2022 Error:<class 'system.MissingFileError'>
+11:33:58 08/01/2022 Error:Sample error description          TEST
