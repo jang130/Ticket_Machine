@@ -3,10 +3,11 @@ import Languages.Polish_interface
 import Languages.Turkish_interface
 from system import WrongOptionError, machine_system
 import time
-from settings import get_databases
+from settings import get_databases, get_ticket_prices
 
+Ticket_prices = get_ticket_prices()
 Databases = get_databases()
-operation = machine_system(Databases)
+operation = machine_system(Databases, Ticket_prices)
 
 
 def ticket_machine_init():

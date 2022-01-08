@@ -49,13 +49,14 @@ class machine_system:
     System class that does all of
     the needed file and computing operations
     '''
-    def __init__(self, Databases):
+    def __init__(self, Databases, Ticket_prices):
         self.ticket_data = Databases[0]
         self.customer_data = Databases[1]
         self.pattern_customer_data = Databases[2]
         self.pattern_ticket_data = Databases[3]
         self.problem_report = Databases[4]
         self.error_logs = Databases[5]
+        self.Ticket_prices = Ticket_prices
     def system_ticket(self, ticket_info):
         '''
         System ticket is a method that have input information
@@ -240,19 +241,19 @@ class machine_system:
         '''
         funds = self.money_split(funds)
         if ticket_type == '20min':
-            funds = self.charge_money(funds, 340)
+            funds = self.charge_money(funds, self.Ticket_prices[0])
         elif ticket_type == '75min':
-            funds = self.charge_money(funds, 440)
+            funds = self.charge_money(funds, self.Ticket_prices[1])
         elif ticket_type == '24h':
-            funds = self.charge_money(funds, 1500)
+            funds = self.charge_money(funds, self.Ticket_prices[2])
         elif ticket_type == '72h':
-            funds = self.charge_money(funds, 3600)
+            funds = self.charge_money(funds, self.Ticket_prices[3])
         elif ticket_type == '1m':
-            funds = self.charge_money(funds, 11000)
+            funds = self.charge_money(funds, self.Ticket_prices[4])
         elif ticket_type == '3m':
-            funds = self.charge_money(funds, 28000)
+            funds = self.charge_money(funds, self.Ticket_prices[5])
         elif ticket_type == '1y':
-            funds = self.charge_money(funds, 44000)
+            funds = self.charge_money(funds, self.Ticket_prices[6])
         return funds
 
     def date_split(self, time):
