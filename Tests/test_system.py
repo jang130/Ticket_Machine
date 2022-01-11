@@ -1,8 +1,8 @@
-
 from interface import Ticket_prices
-from system import NotEnoughMoneyError, PersonNotFoundError, machine_system
-from system import TicketDoesNotExistError, TimeTicketAlreadyExistsError
-from system import MissingFileError
+from system import machine_system
+from error_classes import NotEnoughMoneyError, PersonNotFoundError
+from error_classes import TicketDoesNotExistError, TimeTicketAlreadyExistsError
+from error_classes import MissingFileError
 import pytest
 import io
 from datetime import datetime, date
