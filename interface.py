@@ -1,9 +1,11 @@
 import Languages.English_interface
 import Languages.Polish_interface
 import Languages.Turkish_interface
-from system import WrongOptionError, machine_system
+from system import machine_system
 import time
 from settings import get_databases, get_ticket_prices
+from error_classes import WrongOptionError
+
 
 Ticket_prices = get_ticket_prices()
 Databases = get_databases()

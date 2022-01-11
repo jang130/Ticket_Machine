@@ -3,45 +3,9 @@ from customer_class import customer
 from ticket_class import ticket
 import os
 from dateutil.relativedelta import relativedelta
-
-class WrongAmountOfAtributesInClassError(Exception):
-    def __init__(self):
-        super().__init__('Cannot generate object too many or to less atributes')
-
-
-class WrongOptionError(Exception):
-    def __init__(self):
-        super().__init__('Wrong choice')
-
-
-class PersonNotFoundError(Exception):
-    def __init__(self):
-        super().__init__('Customer not found in database')
-
-
-class TicketAlreadyExistsError(Exception):
-    def __init__(self):
-        super().__init__('Customer already have ticket')
-
-
-class TicketDoesNotExistError(Exception):
-    def __init__(self):
-        super().__init__('Customer does not have ticket')
-
-
-class TimeTicketAlreadyExistsError(Exception):
-    def __init__(self):
-        super().__init__('There can only be one time ticket')
-
-
-class NotEnoughMoneyError(Exception):
-    def __init__(self):
-        super().__init__('Insufficient funds')
-
-
-class MissingFileError(FileNotFoundError):
-    def __init__(self):
-        super().__init__('Data file not found')
+from error_classes import MissingFileError, TimeTicketAlreadyExistsError
+from error_classes import NotEnoughMoneyError, WrongAmountOfAtributesInClassError
+from error_classes import PersonNotFoundError, TicketDoesNotExistError
 
 
 class machine_system:
@@ -52,10 +16,10 @@ class machine_system:
     def __init__(self, Databases, Ticket_prices):
         self.ticket_data = Databases[0]
         self.customer_data = Databases[1]
-        self.pattern_customer_data = Databases[2]
+        self.problem_report = Databases[5]
         self.pattern_ticket_data = Databases[3]
-        self.problem_report = Databases[4]
-        self.error_logs = Databases[5]
+        self.pattern_customer_data = Databases[4]
+        self.error_logs = Databases[6]
         self.Ticket_prices = Ticket_prices
     def system_ticket(self, ticket_info):
         '''
