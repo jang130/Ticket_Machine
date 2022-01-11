@@ -1,4 +1,4 @@
-class customer:
+class machine_customer:
     '''
     Class that represents customer. Read from
     Customer_data.txt

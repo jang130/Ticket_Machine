@@ -2,9 +2,10 @@ class WrongOptionError(Exception):
     def __init__(self):
         super().__init__('Wrong choice')
 
+
 class WrongAmountOfAtributesInClassError(Exception):
     def __init__(self):
-        super().__init__('Cannot generate object too many or to less atributes')
+        super().__init__('Cannot generate object wrong number of atributes')
 
 
 class PersonNotFoundError(Exception):

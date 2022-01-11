@@ -1,11 +1,12 @@
 from datetime import datetime, date
-from customer_class import customer
-from ticket_class import ticket
+from customer_class import machine_customer
+from ticket_class import machine_ticket
 import os
 from dateutil.relativedelta import relativedelta
 from error_classes import MissingFileError, TimeTicketAlreadyExistsError
-from error_classes import NotEnoughMoneyError, WrongAmountOfAtributesInClassError
 from error_classes import PersonNotFoundError, TicketDoesNotExistError
+from error_classes import WrongAmountOfAtributesInClassError
+from error_classes import NotEnoughMoneyError
 
 
 class machine_system:
@@ -21,6 +22,7 @@ class machine_system:
         self.pattern_customer_data = Databases[4]
         self.error_logs = Databases[6]
         self.Ticket_prices = Ticket_prices
+
     def system_ticket(self, ticket_info):
         '''
         System ticket is a method that have input information
@@ -47,8 +49,8 @@ class machine_system:
                         raise TimeTicketAlreadyExistsError
                 ticket_id = self.unique_id()
                 ticket_date = f'{time} {date}'
-                bought_ticket = ticket((ticket_id, ticket_type, ticket_date))
-                self.tickets.append(bought_ticket)
+                ticket = machine_ticket((ticket_id, ticket_type, ticket_date))
+                self.tickets.append(ticket)
                 tickets = self.ticket_split(customer)
                 tickets.append(ticket_id)
                 customer.ticket_id = ';'.join(tickets)
@@ -372,7 +374,7 @@ class machine_system:
                     line = line.rstrip()
                     columns = line.split(',')
                     id, fname, lname, ticket_id, funds = columns
-                    person = customer(columns)
+                    person = machine_customer(columns)
                     self.customers.append(person)
         except FileNotFoundError:
             self.error_log(MissingFileError)
@@ -451,7 +453,7 @@ class machine_system:
                     line = line.rstrip()
                     columns = line.split(',')
                     ticket_id, ticket_type, ticket_date = columns
-                    ticket_unit = ticket(columns)
+                    ticket_unit = machine_ticket(columns)
                     self.tickets.append(ticket_unit)
         except FileNotFoundError:
             self.error_log(MissingFileError)
@@ -489,19 +491,3 @@ class machine_system:
             data = reset.read()
         with open(self.customer_data, "w") as reset:
             reset.write(data)
-
-
-#oper = machine_system()
-#oper.error_log('Customer_data')
-#message = 'jkaxsca'
-#oper.error_log(None, message)
-#oper.tickets_load('Ticket_data')
-#oper.load_file('Customer_data')
-#print(oper.ticket_split(oper.customers[0]))
-#print(oper.system_prepaid_check(('a','a')))
-#prepaid_tickets =oper.system_prepaid_check(('a','a'))
-#output = ''
-#for ticket in prepaid_tickets:
-#    index = prepaid_tickets.index(ticket)
-#    output += f'{prepaid_tickets[index]}\n'
-#print(oper.charge_money((15,50), 1230))

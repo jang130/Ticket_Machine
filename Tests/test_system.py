@@ -1,4 +1,3 @@
-from interface import Ticket_prices
 from system import machine_system
 from error_classes import NotEnoughMoneyError, PersonNotFoundError
 from error_classes import TicketDoesNotExistError, TimeTicketAlreadyExistsError

@@ -1,4 +1,4 @@
-class ticket:
+class machine_ticket:
     '''
     Class that represents ticket. Read from
     Ticket_data.txt
