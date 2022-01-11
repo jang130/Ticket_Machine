@@ -5,8 +5,8 @@ from system import machine_system
 import time
 from settings import get_databases, get_ticket_prices
 from error_classes import MissingFileError, TimeTicketAlreadyExistsError
-from error_classes import NotEnoughMoneyError, WrongAmountOfAtributesInClassError
-from error_classes import PersonNotFoundError, TicketDoesNotExistError, WrongOptionError
+from error_classes import NotEnoughMoneyError, WrongOptionError
+from error_classes import PersonNotFoundError, TicketDoesNotExistError
 
 
 try:
@@ -14,12 +14,14 @@ try:
     Databases = get_databases()
     operation = machine_system(Databases, Ticket_prices)
     language = 0
+
     def ticket_machine_init():
         ticket_data = Databases[0]
         customer_data = Databases[1]
         operation.load_file(customer_data)
         operation.tickets_load(ticket_data)
         choose_language()
+
     def choose_language():
         global language
         language = Languages.English_interface.EN(operation)
@@ -35,48 +37,45 @@ try:
         else:
             operation.error_log(WrongOptionError)
             raise WrongOptionError
+
     def english():
         global language
         language = Languages.English_interface.EN(operation)
         language.menu()
         options()
+
     def polish():
         global language
         language = Languages.Polish_interface.PL(operation)
         language.menu()
         options()
+
     def turkish():
         global language
         language = Languages.Turkish_interface.TR(operation)
         language.menu()
         options()
+
     def options():
         option = operation.choice()
         if option == '1':
-            state = 1
             operation.system_ticket(paper_ticket())
             language.operation_done()
         elif option == '2':
-            state = 2
             operation.system_ticket(time_ticket())
             language.operation_done()
         elif option == '3':
-            state = 3
             expiry = operation.system_check_ticket(check_ticket())
             language.check_ticket(expiry)
         elif option == '4':
-            state = 4
             funds = operation.system_funds_check(funds_check())
             language.funds_check(funds)
         elif option == '5':
-            state = 5
             prepaid_tickets = operation.system_prepaid_check(funds_check())
             language.prepaid_check(prepaid_tickets)
         elif option == '6':
-            state = 6
-            problem_report(state)
+            problem_report()
         elif option == '7':
-            state = 7
             language.terminate()
             time.sleep(3)
             terminate()
@@ -86,10 +85,12 @@ try:
         time.sleep(7)
         language.terminate()
         terminate()
+
     def paper_ticket():
         ticket_type = paper_ticket_type()
         name = personal_data()
         return (name, ticket_type)
+
     def paper_ticket_type():
         language.paper_ticket_type()
         option = operation.choice()
@@ -105,6 +106,7 @@ try:
             operation.error_log(WrongOptionError)
             raise WrongOptionError
         return ticket_type
+
     def time_ticket_type():
         language.time_ticket_type()
         option = operation.choice()
@@ -118,9 +120,11 @@ try:
             operation.error_log(WrongOptionError)
             raise WrongOptionError
         return ticket_type
+
     def funds_check():
         name = personal_data()
         return name
+
     def personal_data():
         language.personal_data('first')
         fname = operation.choice()
@@ -128,22 +132,28 @@ try:
         lname = operation.choice()
         name = (fname, lname)
         return name
+
     def time_ticket():
         ticket_type = time_ticket_type()
         name = personal_data()
         return (name, ticket_type)
-    def problem_report(state):
+
+    def problem_report():
         language.problem_report()
         message = operation.choice()
         operation.error_log(None, message)
         language.operation_done()
+
     def check_ticket():
         name = personal_data()
         return name
+
     def terminate():
         pass
+
     if __name__ == "__main__":
         ticket_machine_init()
+
 except(WrongOptionError):
     language.WrongOption()
     time.sleep(4)
