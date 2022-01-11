@@ -74,3 +74,19 @@ class EN:
         self.operation.clear_console()
         print(self.date)
         print('Please input problem description:')
+
+'''
+Errors 
+'''
+def WrongOption():
+    print('Chosen option is incorrect')
+def MissingFile():
+    print('Database file is missing')
+def TimeTicketExists():
+    print('Time ticket already exists')
+def NotEnoughFunds():
+    print('Insufficient funds')
+def CustomerNotFound():
+    print('Customer not found in the database')
+def TicketDoesNotExist():
+    print('Ticket does not exist')
