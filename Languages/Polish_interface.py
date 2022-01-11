@@ -74,3 +74,25 @@ class PL:
         self.operation.clear_console()
         print(self.date)
         print('Proszę opisać problem:')
+
+    '''
+    Errors
+    '''
+    def WrongOption(self):
+        self.operation.clear_console()
+        print('Wybrana opcja jest niepoprawna.')
+    def MissingFile(self):
+        self.operation.clear_console()
+        print('Nie znaleziono pliku bazy danych.')
+    def TimeTicketExists(self):
+        self.operation.clear_console()
+        print('Bilet czasowy już istnieje')
+    def NotEnoughFunds(self):
+        self.operation.clear_console()
+        print('Niewystarczające środki')
+    def CustomerNotFound(self):
+        self.operation.clear_console()
+        print('Nie znaleziono klienta.')
+    def TicketDoesNotExist(self):
+        self.operation.clear_console()
+        print('Bilet nie istnieje')
