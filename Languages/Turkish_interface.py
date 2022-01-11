@@ -1,5 +1,4 @@
-from system import WrongOptionError
-
+from error_classes import WrongOptionError
 
 class TR:
     def __init__(self, operation):

@@ -1,6 +1,4 @@
-from system import WrongOptionError
-
-
+from error_classes import WrongOptionError
 class PL:
     def __init__(self, operation):
         self.operation = operation
