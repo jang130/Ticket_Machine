@@ -112,3 +112,36 @@
 12:26:36 12/01/2022 Error:<class 'error_classes.MissingFileError'>
 12:26:36 12/01/2022 Error:<class 'error_classes.MissingFileError'>
 12:26:36 12/01/2022 Error:Sample error description          TEST
+14:39:07 12/01/2022 Error:<class 'error_classes.TimeTicketAlreadyExistsError'>
+14:39:07 12/01/2022 Error:<class 'error_classes.NotEnoughMoneyError'>
+14:39:07 12/01/2022 Error:<class 'error_classes.NotEnoughMoneyError'>
+14:39:07 12/01/2022 Error:<class 'error_classes.PersonNotFoundError'>
+14:39:07 12/01/2022 Error:<class 'error_classes.TicketDoesNotExistError'>
+14:39:07 12/01/2022 Error:<class 'error_classes.PersonNotFoundError'>
+14:39:07 12/01/2022 Error:<class 'error_classes.MissingFileError'>
+14:39:07 12/01/2022 Error:<class 'error_classes.MissingFileError'>
+14:39:07 12/01/2022 Error:<class 'error_classes.MissingFileError'>
+14:39:07 12/01/2022 Error:Sample error description          TEST
+14:39:08 12/01/2022 Error:<class 'error_classes.TimeTicketAlreadyExistsError'>
+14:39:08 12/01/2022 Error:<class 'error_classes.NotEnoughMoneyError'>
+14:39:08 12/01/2022 Error:<class 'error_classes.NotEnoughMoneyError'>
+14:39:09 12/01/2022 Error:<class 'error_classes.PersonNotFoundError'>
+14:39:09 12/01/2022 Error:<class 'error_classes.TicketDoesNotExistError'>
+14:39:09 12/01/2022 Error:<class 'error_classes.PersonNotFoundError'>
+14:39:09 12/01/2022 Error:<class 'error_classes.MissingFileError'>
+14:39:09 12/01/2022 Error:<class 'error_classes.MissingFileError'>
+14:39:09 12/01/2022 Error:<class 'error_classes.MissingFileError'>
+14:39:09 12/01/2022 Error:Sample error description          TEST
+14:39:41 12/01/2022 Error:<class 'error_classes.WrongOptionError'>
+14:40:02 12/01/2022 Error:<class 'error_classes.NotEnoughMoneyError'>
+16:13:47 12/01/2022 Error:<class 'error_classes.WrongOptionError'>
+16:15:35 12/01/2022 Error:<class 'error_classes.TimeTicketAlreadyExistsError'>
+16:15:35 12/01/2022 Error:<class 'error_classes.NotEnoughMoneyError'>
+16:15:35 12/01/2022 Error:<class 'error_classes.NotEnoughMoneyError'>
+16:15:35 12/01/2022 Error:<class 'error_classes.PersonNotFoundError'>
+16:15:35 12/01/2022 Error:<class 'error_classes.TicketDoesNotExistError'>
+16:15:35 12/01/2022 Error:<class 'error_classes.PersonNotFoundError'>
+16:15:35 12/01/2022 Error:<class 'error_classes.MissingFileError'>
+16:15:35 12/01/2022 Error:<class 'error_classes.MissingFileError'>
+16:15:35 12/01/2022 Error:<class 'error_classes.MissingFileError'>
+16:15:35 12/01/2022 Error:Sample error description          TEST
