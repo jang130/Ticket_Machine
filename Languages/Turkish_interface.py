@@ -1,5 +1,6 @@
 from error_classes import WrongOptionError
 
+
 class TR:
     def __init__(self, operation):
         self.operation = operation
@@ -82,18 +83,23 @@ class TR:
     def WrongOption(self):
         self.operation.clear_console()
         print('Seçim hatalı')
+
     def MissingFile(self):
         self.operation.clear_console()
         print('Veritabanı dosyası eksik')
+
     def TimeTicketExists(self):
         self.operation.clear_console()
         print('Zamanlı bileti çoktan var')
+
     def NotEnoughFunds(self):
         self.operation.clear_console()
         print('Kaynaklar yetersiz')
+
     def CustomerNotFound(self):
         self.operation.clear_console()
         print('Müşteri veritabanında bulunmuyor.')
+
     def TicketDoesNotExist(self):
         self.operation.clear_console()
         print('Bilet mevcut değil')

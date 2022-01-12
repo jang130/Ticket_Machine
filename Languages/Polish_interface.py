@@ -1,4 +1,6 @@
 from error_classes import WrongOptionError
+
+
 class PL:
     def __init__(self, operation):
         self.operation = operation
@@ -81,18 +83,23 @@ class PL:
     def WrongOption(self):
         self.operation.clear_console()
         print('Wybrana opcja jest niepoprawna.')
+
     def MissingFile(self):
         self.operation.clear_console()
         print('Nie znaleziono pliku bazy danych.')
+
     def TimeTicketExists(self):
         self.operation.clear_console()
         print('Bilet czasowy już istnieje')
+
     def NotEnoughFunds(self):
         self.operation.clear_console()
         print('Niewystarczające środki')
+
     def CustomerNotFound(self):
         self.operation.clear_console()
         print('Nie znaleziono klienta.')
+
     def TicketDoesNotExist(self):
         self.operation.clear_console()
         print('Bilet nie istnieje')

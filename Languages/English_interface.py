@@ -1,5 +1,6 @@
 from error_classes import WrongOptionError
 
+
 class EN:
     def __init__(self, operation):
         self.operation = operation
@@ -81,18 +82,23 @@ class EN:
     def WrongOption(self):
         self.operation.clear_console()
         print('Chosen option is incorrect')
+
     def MissingFile(self):
         self.operation.clear_console()
         print('Database file is missing')
+
     def TimeTicketExists(self):
         self.operation.clear_console()
         print('Time ticket already exists')
+
     def NotEnoughFunds(self):
         self.operation.clear_console()
         print('Insufficient funds')
+
     def CustomerNotFound(self):
         self.operation.clear_console()
         print('Customer not found in the database')
+
     def TicketDoesNotExist(self):
         self.operation.clear_console()
         print('Ticket does not exist')

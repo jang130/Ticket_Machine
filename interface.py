@@ -151,8 +151,7 @@ while True:
         def terminate():
             pass
 
-        if __name__ == "__main__":
-            ticket_machine_init()
+        ticket_machine_init()
 
     except(WrongOptionError):
         language.WrongOption()
