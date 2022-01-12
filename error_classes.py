@@ -1,3 +1,6 @@
+'''
+error_classes contains classes with error exceptions
+'''
 class WrongOptionError(Exception):
     def __init__(self):
         super().__init__('Wrong choice')
