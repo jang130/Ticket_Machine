@@ -413,3 +413,76 @@ problem
 11:33:58 08/01/2022 Error:<class 'system.MissingFileError'>
 11:33:58 08/01/2022 Error:<class 'system.MissingFileError'>
 11:33:58 08/01/2022 Error:Sample error description          TEST
+15:45:52 09/01/2022 Error:<class 'system.TimeTicketAlreadyExistsError'>
+15:45:52 09/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+15:45:52 09/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+15:45:53 09/01/2022 Error:<class 'system.PersonNotFoundError'>
+15:45:53 09/01/2022 Error:<class 'system.TicketDoesNotExistError'>
+15:45:53 09/01/2022 Error:<class 'system.PersonNotFoundError'>
+15:45:53 09/01/2022 Error:<class 'system.MissingFileError'>
+15:45:53 09/01/2022 Error:<class 'system.MissingFileError'>
+15:45:53 09/01/2022 Error:<class 'system.MissingFileError'>
+15:45:53 09/01/2022 Error:Sample error description          TEST
+15:46:03 09/01/2022 Error:<class 'system.TimeTicketAlreadyExistsError'>
+15:46:04 09/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+15:46:04 09/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+15:46:04 09/01/2022 Error:<class 'system.PersonNotFoundError'>
+15:46:04 09/01/2022 Error:<class 'system.TicketDoesNotExistError'>
+15:46:04 09/01/2022 Error:<class 'system.PersonNotFoundError'>
+15:46:04 09/01/2022 Error:<class 'system.MissingFileError'>
+15:46:04 09/01/2022 Error:<class 'system.MissingFileError'>
+15:46:04 09/01/2022 Error:<class 'system.MissingFileError'>
+15:46:04 09/01/2022 Error:Sample error description          TEST
+10:06:19 11/01/2022 Error:<class 'system.TimeTicketAlreadyExistsError'>
+10:06:20 11/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+10:06:20 11/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+10:06:20 11/01/2022 Error:<class 'system.PersonNotFoundError'>
+10:06:20 11/01/2022 Error:<class 'system.TicketDoesNotExistError'>
+10:06:21 11/01/2022 Error:<class 'system.PersonNotFoundError'>
+10:06:21 11/01/2022 Error:<class 'system.MissingFileError'>
+10:06:21 11/01/2022 Error:<class 'system.MissingFileError'>
+10:06:21 11/01/2022 Error:<class 'system.MissingFileError'>
+10:06:21 11/01/2022 Error:Sample error description          TEST
+11:15:00 11/01/2022 Error:<class 'interface.WrongOptionError'>
+11:16:47 11/01/2022 Error:<class 'interface.WrongOptionError'>
+11:17:16 11/01/2022 Error:<class 'system.TimeTicketAlreadyExistsError'>
+11:17:16 11/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:17:16 11/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:17:17 11/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:17:17 11/01/2022 Error:<class 'system.TicketDoesNotExistError'>
+11:17:17 11/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:17:17 11/01/2022 Error:<class 'system.MissingFileError'>
+11:17:17 11/01/2022 Error:<class 'system.MissingFileError'>
+11:17:17 11/01/2022 Error:<class 'system.MissingFileError'>
+11:17:17 11/01/2022 Error:Sample error description          TEST
+11:18:21 11/01/2022 Error:<class 'system.TimeTicketAlreadyExistsError'>
+11:18:21 11/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:18:21 11/01/2022 Error:<class 'system.NotEnoughMoneyError'>
+11:18:21 11/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:18:21 11/01/2022 Error:<class 'system.TicketDoesNotExistError'>
+11:18:21 11/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:18:21 11/01/2022 Error:<class 'system.MissingFileError'>
+11:18:21 11/01/2022 Error:<class 'system.MissingFileError'>
+11:18:21 11/01/2022 Error:<class 'system.MissingFileError'>
+11:18:21 11/01/2022 Error:Sample error description          TEST
+11:18:32 11/01/2022 Error:<class 'interface.WrongOptionError'>
+11:29:19 11/01/2022 Error:<class 'system.PersonNotFoundError'>
+11:29:59 11/01/2022 Error:<class 'error_classes.WrongOptionError'>
+11:33:05 11/01/2022 Error:<class 'error_classes.WrongOptionError'>
+11:35:06 11/01/2022 Error:<class 'error_classes.WrongOptionError'>
+11:35:53 11/01/2022 Error:<class 'error_classes.NotEnoughMoneyError'>
+11:35:53 11/01/2022 Error:<class 'error_classes.NotEnoughMoneyError'>
+11:35:54 11/01/2022 Error:<class 'error_classes.MissingFileError'>
+11:35:54 11/01/2022 Error:<class 'error_classes.MissingFileError'>
+11:35:54 11/01/2022 Error:<class 'error_classes.MissingFileError'>
+11:35:54 11/01/2022 Error:Sample error description          TEST
+13:40:48 11/01/2022 Error:<class 'error_classes.TimeTicketAlreadyExistsError'>
+13:40:48 11/01/2022 Error:<class 'error_classes.NotEnoughMoneyError'>
+13:40:48 11/01/2022 Error:<class 'error_classes.NotEnoughMoneyError'>
+13:40:48 11/01/2022 Error:<class 'error_classes.PersonNotFoundError'>
+13:40:48 11/01/2022 Error:<class 'error_classes.TicketDoesNotExistError'>
+13:40:48 11/01/2022 Error:<class 'error_classes.PersonNotFoundError'>
+13:40:48 11/01/2022 Error:<class 'error_classes.MissingFileError'>
+13:40:48 11/01/2022 Error:<class 'error_classes.MissingFileError'>
+13:40:48 11/01/2022 Error:<class 'error_classes.MissingFileError'>
+13:40:48 11/01/2022 Error:Sample error description          TEST
