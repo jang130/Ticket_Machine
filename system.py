@@ -407,7 +407,7 @@ class machine_system:
                     log.write(f'\n{time} {date} Error:{error}')
             elif error is None:
                 with open(self.problem_report, "w") as log:
-                    log.write(f'\n{message}')
+                    log.write(f'\n{message}\n\r')
                     log.write(data)
         except FileNotFoundError:
             self.error_log(MissingFileError)
